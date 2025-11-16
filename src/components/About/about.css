@@ -1,0 +1,38 @@
+.about {
+  background-color: #ffffff;
+  padding: 80px 216px 80px 104px;
+}
+
+.about__container {
+  color: black;
+  display: flex;
+  gap: 56px;
+}
+
+.about__avatar {
+  width: 464px;
+}
+
+.about__avatar-image {
+  width: 464px;
+  height: 464px;
+  border-radius: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about__heading {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  margin-top: 51px;
+  margin-bottom: 24px;
+}
+
+.about__description {
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0px;
+}
