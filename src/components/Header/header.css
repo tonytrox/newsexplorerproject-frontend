@@ -1,1 +1,17 @@
+.header {
+  width: 1400px;
+  position: absolute;
+  /* border-bottom: 1px solid #c4c4c4; */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-left: 104px;
+  padding-top: 30px;
+  padding-bottom: 26px;
+}
 
+.header__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  margin: 0px;
+}
