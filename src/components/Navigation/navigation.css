@@ -7,13 +7,12 @@
 /* } */
 
 .site-navigation__list {
-  /* height: 200px; */
   align-items: center;
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 54px;
+  gap: 36px;
 }
 
 .site-navigation__link {
@@ -22,10 +21,14 @@
   font-size: 18px;
   line-height: 24px;
   text-decoration: none;
-  color: #ffffff;
+  color: #b6bcbf;
   transition: opacity 0.3s;
+  padding: 23px 13px 27px 13px;
+  border-bottom: 0px solid transparent;
 }
 
 .site-navigation__link:hover {
-  opacity: 0.7;
+  opacity: 1;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
