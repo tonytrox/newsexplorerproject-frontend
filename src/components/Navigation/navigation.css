@@ -6,13 +6,17 @@
 /* max-height: 200px; */
 /* } */
 
+.site-navigation {
+  border: 1px solid salmon;
+}
+
 .site-navigation__list {
   align-items: center;
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 36px;
+  gap: 16px;
 }
 
 .site-navigation__link {
