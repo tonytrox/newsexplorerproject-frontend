@@ -1,0 +1,30 @@
+.news {
+  padding: 80px 104px;
+  background: #f5f6f7;
+}
+
+.news__title {
+  color: #1a1b22;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+}
+
+.news__button {
+  padding: 20px 110px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  background: #ffffff;
+  color: #1a1b22;
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.news__button:hover {
+  background: #e8e8e8;
+}
