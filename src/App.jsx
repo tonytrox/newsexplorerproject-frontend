@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router';
 import './App.css';
 import Home from './components/Home/Home';
+import SavedNews from './components/SavedNews/SaveNews';
 
 function App() {
   return (
@@ -8,16 +9,7 @@ function App() {
       <div className="page__container">
         <Routes>
           <Route path="/" element={<Home />} />
-
-          <Route
-            path="/saved"
-            element={
-              <div>
-                <h2>Tus artículos guardados</h2>
-                {/* <SavedNews /> */}
-              </div>
-            }
-          />
+          <Route path="/saved" element={<SavedNews />} />
         </Routes>
       </div>
     </div>
