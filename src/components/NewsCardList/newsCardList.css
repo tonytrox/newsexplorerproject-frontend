@@ -4,6 +4,9 @@
 }
 
 .news__title {
+  margin: 0px;
+  margin-bottom: 64px;
+  padding: 0px;
   color: #1a1b22;
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
@@ -12,6 +15,8 @@
 }
 
 .news__button {
+  margin-top: 64px;
+  /* margin-bottom: 80px; */
   padding: 20px 110px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
