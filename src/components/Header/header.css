@@ -1,20 +1,29 @@
 .header {
-  width: 1000px;
-  position: absolute;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0px;
   padding-left: 104px;
   padding-right: 104px;
   padding-top: 30px;
   padding-bottom: 26px;
+  width: 100%;
+  max-width: 1440px;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* border: 1px solid orangered; */
 
   display: flex;
   justify-content: space-between;
 }
 
 .header__title {
+  margin: 0px;
   font-family: 'Roboto Slab', serif;
+  font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  font-weight: 700;
-  margin: 0px;
+  color: black;
+  /* border: 1px solid green; */
 }

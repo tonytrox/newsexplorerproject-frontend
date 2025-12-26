@@ -6,7 +6,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 function SavedNews() {
   return (
     <main className="saved-news">
-      {/* <Header /> */}
+      <Header />
       <SavedNewsHeader />
       <NewsCardList />
       <Footer />
