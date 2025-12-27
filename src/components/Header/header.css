@@ -7,15 +7,15 @@
   width: 100%;
   max-width: 1440px;
   position: absolute;
-  top: 0px;
-  left: 50%;
-  transform: translateX(-50%);
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
+  border-bottom: 1px solid rgb(0, 0, 0);
   /* border: 1px solid orangered; */
 
   display: flex;
   justify-content: space-between;
+  /* border: 1px solid greenyellow; */
+  box-sizing: border-box;
 }
 
 .header__title {
@@ -24,6 +24,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+  /* color: white; */
   color: black;
   /* border: 1px solid green; */
 }

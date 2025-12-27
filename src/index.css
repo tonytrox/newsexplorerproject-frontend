@@ -1,14 +1,5 @@
 :root {
   /* color-scheme: light dark; */
-  color: rgba(255, 255, 255, 0.87);
+  /* color: rgba(255, 255, 255, 0.87); */
   background-color: #242424;
-}
-
-body {
-  /* border: 10px solid red; */
-  margin: 0px;
-  padding: 0px;
-  display: flex;
-  place-items: center;
-  /* min-height: 100vh; */
 }

@@ -5,14 +5,8 @@
   padding-top: 120px;
   padding-left: 104px;
   background: #ffffff;
-  width: 1232px;
   /* display: flex; */
 }
-
-/* .saved-news-header__container {
-  max-width: 1232px;
-  margin: 0 auto;
-} */
 
 .saved-news-header__subtitle {
   margin: 0px;

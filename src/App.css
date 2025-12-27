@@ -4,5 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400&display=swap');
 
 .page {
+  margin: 0 auto;
+  max-width: 1440px;
   /* border: 1px solid white; */
 }
