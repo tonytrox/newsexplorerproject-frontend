@@ -1,25 +1,27 @@
 .news {
-  padding: 80px 104px;
+  padding-top: 32px;
+  padding-bottom: 24px;
   background: #f5f6f7;
-  /* display: flex; */
 }
 
 .news__title {
-  margin: 0px;
-  margin-bottom: 64px;
+  width: 288px;
+  margin: 0px auto;
+  margin-bottom: 24px;
   padding: 0px;
-  color: #1a1b22;
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
-  font-size: 40px;
-  line-height: 46px;
+  font-size: 30px;
+  line-height: 34px;
+  color: #1a1b22;
 }
 
 .news__button {
+  width: 288px;
+  height: 56px;
+  margin: 0 auto;
+  margin-top: 16px;
   display: block;
-  /* margin-top: 64px; */
-  margin: 64px auto 0;
-  padding: 20px 110px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: 18px;
@@ -34,4 +36,29 @@
 
 .news__button:hover {
   background: #e8e8e8;
+}
+
+@media (min-width: 768px) {
+  .news__title {
+    width: 548px;
+    margin: 0px;
+    padding-left: 40px;
+    padding-bottom: 20px;
+  }
+
+  .news__button {
+    width: 240px;
+    height: 56px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .news__button {
+    width: 288px;
+    height: 64px;
+  }
+
+  .news__title {
+    padding-left: 104px;
+  }
 }
