@@ -11,7 +11,7 @@ function Navigation() {
           </NavLink>
         </li>
         <li className="site-navigation__item">
-          <NavLink to="/saved" className="site-navigation__link">
+          <NavLink to="/saved-news" className="site-navigation__link">
             Artículos guardados
           </NavLink>
         </li>
