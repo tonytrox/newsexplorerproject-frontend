@@ -85,3 +85,77 @@
   letter-spacing: 0.4px;
   color: #b6bcbf;
 }
+
+@media (min-width: 768px) {
+  .card {
+    width: 224px;
+    height: 420px;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 150px;
+  }
+
+  .card__date {
+    width: 100%;
+    height: 24px;
+  }
+
+  .card__title {
+    width: 100%;
+    height: 96px;
+    display: block;
+    font-size: 20px;
+  }
+
+  .card__text {
+    width: 100%;
+    height: 44px;
+    margin: 0px;
+    padding-top: 33px;
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (min-width: 1440px) {
+  .card {
+    width: 400px;
+    height: 576px;
+  }
+
+  .card__image {
+    width: 100%;
+    height: 272px;
+  }
+
+  .card__date {
+    width: 100%;
+    height: 24px;
+  }
+
+  .card__content {
+    margin: 0px;
+    padding: 20px 24px 24px 24px;
+  }
+
+  .card__title {
+    width: 100%;
+    height: 90px;
+    display: block;
+    font-size: 26px;
+    line-height: 30px;
+  }
+
+  .card__text {
+    width: 100%;
+    height: 88px;
+    margin: 0px;
+    padding-top: 12px;
+    -webkit-line-clamp: 4;
+  }
+
+  .card__source {
+    padding-top: 14px;
+  }
+}

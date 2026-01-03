@@ -4,6 +4,7 @@ import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <div className="page__container">
         <Header />
         <SearchForm />
+        <NewsCardList />
         <About />
         <Footer />
       </div>

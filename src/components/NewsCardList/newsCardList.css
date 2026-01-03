@@ -16,6 +16,14 @@
   color: #1a1b22;
 }
 
+.news__list {
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
 .news__button {
   width: 288px;
   height: 56px;
@@ -39,16 +47,27 @@
 }
 
 @media (min-width: 768px) {
+  .news {
+    padding-top: 0px;
+  }
+
   .news__title {
     width: 548px;
     margin: 0px;
     padding-left: 40px;
     padding-bottom: 20px;
+    padding-top: 40px;
   }
 
   .news__button {
     width: 240px;
     height: 56px;
+  }
+
+  .news__list {
+    margin: 0 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 }
 
@@ -60,5 +79,12 @@
 
   .news__title {
     padding-left: 104px;
+    padding-top: 80px;
+    padding-bottom: 64px;
+  }
+
+  .news__list {
+    gap: 16px;
+    margin: 0 104px;
   }
 }
