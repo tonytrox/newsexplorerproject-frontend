@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import './newsCardList.css';
 
 import NewsCard from '../NewsCard/NewsCard';
+import Preloader from '../Preloader/Preloader';
 
 const mockData = [
   {
@@ -56,6 +58,25 @@ const mockData = [
 // const mockData = [false];
 
 function NewsCardList() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simula una carga (API)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <section>
+        <Preloader />
+      </section>
+    );
+  }
+
   return (
     <section className="news">
       <div className="news__container">
