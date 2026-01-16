@@ -23,7 +23,16 @@
 .site-navigation__link:hover {
   color: #ffffff;
   border-bottom: 3px solid #ffffff;
-  /* border-bottom: 3px solid black; */
+}
+
+.site-navigation__link--saved:hover {
+  color: #1a1b22;
+  border-bottom: 3px solid #1a1b22;
+}
+
+.site-navigation__hamburger {
+  display: none;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -36,5 +45,49 @@
 @media (max-width: 320px) {
   .site-navigation {
     display: none;
+  }
+
+  .site-navigation__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #ffffff;
+  }
+
+  .site-navigation__hamburger--saved {
+    color: #1a1b22;
+  }
+
+  .site-navigation__overlay {
+    width: 320px;
+    height: 174px;
+    left: 0px;
+    top: 56px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+  }
+
+  .site-navigation__list--mobile {
+    flex-direction: column;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    gap: 21px;
+  }
+
+  .site-navigation__link--mobile {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 56px;
+    text-decoration: none;
+    color: #b6bcbf;
+  }
+
+  .site-navigation__link--mobile:hover {
+    color: #ffffff;
   }
 }
