@@ -1,0 +1,30 @@
+import './notFoundResults.css';
+
+function NotFoundResults() {
+  return (
+    <section className="not-found">
+      <svg
+        width="83"
+        height="83"
+        viewBox="0 0 83 83"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="37" cy="37" r="36.5" stroke="#D1D2D6" />
+        <path d="M63 63L82.5 82.5" stroke="#D1D2D6" />
+        <path
+          d="M52.3283 49.9592C48.6606 45.6981 43.2275 43 37.1642 43C31.1009 43 25.6678 45.6981 22 49.9592"
+          stroke="#D1D2D6"
+        />
+        <circle cx="49.5" cy="27.5" r="1.5" fill="#D1D2D6" />
+        <circle cx="24.5" cy="27.5" r="1.5" fill="#D1D2D6" />
+      </svg>
+      <h2 className="not-found__title">No se encontró nada</h2>
+      <p className="not-found__message">
+        Lo sentimos, pero no hay nada que coincida con tus términos de búsqueda.
+      </p>
+    </section>
+  );
+}
+
+export default NotFoundResults;
