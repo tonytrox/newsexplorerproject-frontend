@@ -1,6 +1,6 @@
 import './notFoundResults.css';
 
-function NotFoundResults() {
+function NotFoundResults({ title, message }) {
   return (
     <section className="not-found">
       <svg
@@ -19,10 +19,8 @@ function NotFoundResults() {
         <circle cx="49.5" cy="27.5" r="1.5" fill="#D1D2D6" />
         <circle cx="24.5" cy="27.5" r="1.5" fill="#D1D2D6" />
       </svg>
-      <h2 className="not-found__title">No se encontró nada</h2>
-      <p className="not-found__message">
-        Lo sentimos, pero no hay nada que coincida con tus términos de búsqueda.
-      </p>
+      <h2 className="not-found__title">{title}</h2>
+      <p className="not-found__message">{message}</p>
     </section>
   );
 }
