@@ -1,7 +1,7 @@
-import { createNews } from './NewsAPI.js';
+import { createNewsData } from './NewsAPI.js';
 
 async function test() {
-  await createNews('aves');
+  await createNewsData('aves');
 }
 
 test();
