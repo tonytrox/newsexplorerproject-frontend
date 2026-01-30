@@ -12,7 +12,7 @@ function Home() {
       <div className="page__container">
         <Header />
         <SearchForm />
-        <NewsCardList />
+        {/* <NewsCardList /> */}
         <About />
         <Footer />
       </div>

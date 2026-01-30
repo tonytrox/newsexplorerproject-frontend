@@ -3,45 +3,62 @@ import './searchForm.css';
 import Preloader from '../Preloader/Preloader';
 import NotFoundResults from '../NotFoundResults/NotFoundResults';
 
+// Función para simular un retraso
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 function SearchForm() {
   // buscar palabra clave
   const [keyword, setKeyword] = useState('');
-  const [searchError, setSearchError] = useState('');
+  const [inputSearchError, setInputSearchError] = useState('');
   // preloader
   const [loading, setLoading] = useState(false);
   // errores
   const [error, setError] = useState(null);
 
-  const handleSubmitForm = (event) => {
+  const handleSubmitForm = async (event) => {
     event.preventDefault();
 
     if (!keyword.trim()) {
-      // '!keyword.trim()' devuelve `true` solo cuando no hay texto después de quitar espacios.
-      setSearchError('Por favor, introduzca una palabra clave');
+      // Si el campo está vacío, muestra un error y detén el flujo
+      setInputSearchError('Por favor, introduzca una palabra clave');
       return;
     }
 
-    setSearchError('');
-    setLoading(true); // Activa el preloader
+    // Limpia cualquier error previo antes de iniciar una nueva búsqueda
     setError(null);
+    setLoading(true); // Activa el preloader
 
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await delay(2000);
 
-      // igualdad estricta. Compara
+      if (keyword === 'none') {
+        throw new Error('KEYWORD_ERROR');
+      }
+
       if (keyword === 'error') {
+        throw new Error('SERVER_ERROR');
+      }
+    } catch (err) {
+      if (err.message === 'KEYWORD_ERROR') {
+        setError({
+          title: 'No se encontró nada',
+          message: 'Lo sentimos, pero no hay nada que coincida con tus términos de búsqueda.',
+        });
+      } else {
         setError({
           title: 'Lo sentimos, algo ha salido mal durante la solicitud',
           message:
             'Es posible que haya un problema de conexión o que el servidor no funcione. Por favor, inténtalo más tarde.',
         });
       }
-    }, 5000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleInputChange = (event) => {
     setKeyword(event.target.value);
-    setSearchError('');
+    setInputSearchError('');
   };
 
   return (
@@ -66,7 +83,7 @@ function SearchForm() {
                 Buscar
               </button>
             </div>
-            {searchError && <span className="search__error">{searchError}</span>}
+            {inputSearchError && <span className="search__error">{inputSearchError}</span>}
           </form>
         </div>
       </section>
