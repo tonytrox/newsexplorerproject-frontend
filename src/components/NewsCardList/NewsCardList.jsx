@@ -1,89 +1,15 @@
-import { useEffect, useState } from 'react';
 import './newsCardList.css';
 
 import NewsCard from '../NewsCard/NewsCard';
-import Preloader from '../Preloader/Preloader';
 
-const mockData = [
-  {
-    id: 1,
-    image: 'https://picsum.photos/400/272?1',
-    date: '4 nov 2020',
-    title: 'Noticia A',
-    text: 'Texto A',
-    source: 'treehugger',
-  },
-  {
-    id: 2,
-    image: 'https://picsum.photos/400/272?2',
-    date: '5 nov 2020',
-    title: 'Noticia B',
-    text: 'Texto B',
-    source: 'example',
-  },
-  {
-    id: 3,
-    image: 'https://picsum.photos/400/272?3',
-    date: '6 nov 2020',
-    title: 'Noticia C',
-    text: 'Texto C',
-    source: 'example',
-  },
-  {
-    id: 4,
-    image: 'https://picsum.photos/400/272?4',
-    date: '4 nov 2020',
-    title: 'Noticia D',
-    text: 'Texto A',
-    source: 'treehugger',
-  },
-  {
-    id: 5,
-    image: 'https://picsum.photos/400/272?5',
-    date: '4 nov 2020',
-    title: 'Noticia E',
-    text: 'Texto A',
-    source: 'treehugger',
-  },
-  {
-    id: 6,
-    image: 'https://picsum.photos/400/272?6',
-    date: '4 nov 2020',
-    title: 'Noticia F',
-    text: 'Texto A',
-    source: 'treehugger',
-  },
-];
-
-// const mockData = [false];
-
-function NewsCardList() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Simula una carga (API)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <section>
-        <Preloader />
-      </section>
-    );
-  }
-
+function NewsCardList({ cards }) {
   return (
     <section className="news">
       <div className="news__container">
         <h2 className="news__title">Resultados de la búsqueda</h2>
         <ul className="news__list">
-          {mockData.map((itemNews) => (
-            <NewsCard key={itemNews.id} {...itemNews} />
+          {cards.map((itemNews, index) => (
+            <NewsCard key={index} {...itemNews} />
           ))}
         </ul>
         <button className="news__button">Ver más</button>

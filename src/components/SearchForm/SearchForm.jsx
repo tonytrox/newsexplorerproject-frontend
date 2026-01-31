@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './searchForm.css';
 import Preloader from '../Preloader/Preloader';
 import NotFoundResults from '../NotFoundResults/NotFoundResults';
+import { createNewsData } from '../../utils/NewsAPI';
+import NewsCardList from '../NewsCardList/NewsCardList';
 
 // Función para simular un retraso
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,6 +16,8 @@ function SearchForm() {
   const [loading, setLoading] = useState(false);
   // errores
   const [error, setError] = useState(null);
+  // news data
+  const [cards, setCards] = useState([]);
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
@@ -27,17 +31,26 @@ function SearchForm() {
     // Limpia cualquier error previo antes de iniciar una nueva búsqueda
     setError(null);
     setLoading(true); // Activa el preloader
+    setCards([]);
 
     try {
-      await delay(2000);
+      const data = await createNewsData(keyword);
 
-      if (keyword === 'none') {
+      await delay(2000);
+      // condicional
+      if (keyword === 'none' || data.articles.length === 0) {
         throw new Error('KEYWORD_ERROR');
       }
 
       if (keyword === 'error') {
         throw new Error('SERVER_ERROR');
       }
+
+      console.log(data);
+      console.log('articles :', data.articles);
+
+      // Almacenar las tarjetas en el estado
+      setCards(data.articles);
     } catch (err) {
       if (err.message === 'KEYWORD_ERROR') {
         setError({
@@ -90,6 +103,8 @@ function SearchForm() {
       {loading && <Preloader />}
 
       {!loading && error && <NotFoundResults title={error.title} message={error.message} />}
+
+      {!loading && cards.length > 0 && <NewsCardList cards={cards} />}
     </>
   );
 }
