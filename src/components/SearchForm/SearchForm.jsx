@@ -18,6 +18,8 @@ function SearchForm() {
   const [error, setError] = useState(null);
   // news data
   const [cards, setCards] = useState([]);
+  // renderizar cada 3 items
+  const [visibleCards, setVisibleCards] = useState(3);
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
@@ -74,6 +76,10 @@ function SearchForm() {
     setInputSearchError('');
   };
 
+  const handleShowMore = () => {
+    setVisibleCards((prev) => prev + 3);
+  };
+
   return (
     <>
       <section className="search">
@@ -101,10 +107,16 @@ function SearchForm() {
         </div>
       </section>
       {loading && <Preloader />}
-
       {!loading && error && <NotFoundResults title={error.title} message={error.message} />}
-
-      {!loading && cards.length > 0 && <NewsCardList cards={cards} />}
+      {!loading && cards.length > 0 && (
+        <NewsCardList
+          cards={cards.slice(0, visibleCards)}
+          onShowMore={handleShowMore}
+          hasMore={visibleCards < cards.length} // hay más tarjetas por mostrar ?
+        />
+      )}
+      {/* 'slice' es un método que devuelve una copia parcial del array original, sin modificarlo:
+      array.slice(inicio, fin) */}
     </>
   );
 }
