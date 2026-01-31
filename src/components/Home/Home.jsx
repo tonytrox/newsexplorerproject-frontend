@@ -6,13 +6,12 @@ import About from '../About/About';
 import Footer from '../Footer/Footer';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Home() {
+function Home({ cards, setCards }) {
   return (
     <div className="page">
       <div className="page__container">
         <Header />
-        <SearchForm />
-        {/* <NewsCardList /> */}
+        <SearchForm cards={cards} setCards={setCards} />
         <About />
         <Footer />
       </div>

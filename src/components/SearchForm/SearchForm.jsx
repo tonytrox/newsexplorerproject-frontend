@@ -8,7 +8,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 // Función para simular un retraso
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function SearchForm() {
+function SearchForm({ cards, setCards }) {
   // buscar palabra clave
   const [keyword, setKeyword] = useState('');
   const [inputSearchError, setInputSearchError] = useState('');
@@ -17,7 +17,7 @@ function SearchForm() {
   // errores
   const [error, setError] = useState(null);
   // news data
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]); (SUBIO AL COMPONENTE PADRE)
   // renderizar cada 3 items
   const [visibleCards, setVisibleCards] = useState(3);
 
