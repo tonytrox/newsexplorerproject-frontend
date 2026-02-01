@@ -17,6 +17,7 @@ function NewsCard(props) {
         <h3 className="card__title">{title}</h3>
         <p className="card__text">{description}</p>
         <p className="card__source">{source.name}</p>
+        <button className="card__save-button"></button>
       </div>
     </li>
   );

@@ -8,6 +8,7 @@
   background: #fff;
   transition: box-shadow 0.1s;
   text-decoration: none;
+  position: relative;
 }
 
 .card:hover {
@@ -86,7 +87,36 @@
   color: #b6bcbf;
 }
 
+.card__save-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff;
+  background-image: url('../../assets/bookmark.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.card__save-button:hover {
+  background-image: url('../../assets/bookmark-outline.svg');
+}
+
+.card__save-button_active {
+  background-image: url('../../assets/bookmark-filled.svg');
+}
+
 @media (min-width: 768px) {
+  .card__save-button {
+    top: 8px;
+    right: 8px;
+  }
+
   .card {
     width: 224px;
     height: 420px;
@@ -119,6 +149,11 @@
 }
 
 @media (min-width: 1440px) {
+  .card__save-button {
+    top: 24px;
+    right: 24px;
+  }
+
   .card {
     width: 400px;
     height: 576px;
