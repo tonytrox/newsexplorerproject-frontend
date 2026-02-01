@@ -2,15 +2,24 @@ import './newsCardList.css';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ cards, onShowMore, hasMore }) {
+function NewsCardList({ title, cards, onShowMore, hasMore, savedCards, onSave, onRemove }) {
   return (
     <section className="news">
       <div className="news__container">
-        <h2 className="news__title">Resultados de la búsqueda</h2>
+        <h2 className="news__title">{title}</h2>
         <ul className="news__list">
-          {cards.map((itemNews, index) => (
-            <NewsCard key={index} {...itemNews} />
-          ))}
+          {cards.map((itemNews, index) => {
+            const isSaved = savedCards.some((savedCard) => savedCard.title === itemNews.title);
+            return (
+              <NewsCard
+                key={index}
+                {...itemNews} //Props
+                isSaved={isSaved}
+                onSave={onSave}
+                onRemove={onRemove}
+              />
+            );
+          })}
         </ul>
 
         {hasMore && (

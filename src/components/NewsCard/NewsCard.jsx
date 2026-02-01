@@ -1,7 +1,15 @@
 import './newsCard.css';
 
 function NewsCard(props) {
-  const { urlToImage, publishedAt, title, description, source } = props;
+  const { urlToImage, publishedAt, title, description, source, isSaved, onSave, onRemove } = props;
+
+  const handleSaveBookmark = () => {
+    if (isSaved) {
+      onRemove({ urlToImage, publishedAt, title, description, source });
+    } else {
+      onSave({ urlToImage, publishedAt, title, description, source });
+    }
+  };
 
   return (
     <li className="card">
@@ -17,7 +25,11 @@ function NewsCard(props) {
         <h3 className="card__title">{title}</h3>
         <p className="card__text">{description}</p>
         <p className="card__source">{source.name}</p>
-        <button className="card__save-button"></button>
+        <button
+          title="Inicia sesión para guardar artículos"
+          className={`card__save-button ${isSaved && 'card__save-button_active'}`}
+          onClick={handleSaveBookmark}
+        ></button>
       </div>
     </li>
   );

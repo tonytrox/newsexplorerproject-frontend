@@ -1,21 +1,23 @@
 import './home.css';
-
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
-import NewsCardList from '../NewsCardList/NewsCardList';
 
-function Home({ cards, setCards }) {
+function Home({ cards, setCards, savedCards, onSave, onRemove }) {
   return (
-    <div className="page">
-      <div className="page__container">
-        <Header />
-        <SearchForm cards={cards} setCards={setCards} />
-        <About />
-        <Footer />
-      </div>
-    </div>
+    <>
+      <Header />
+      <SearchForm
+        cards={cards}
+        setCards={setCards}
+        savedCards={savedCards}
+        onSave={onSave}
+        onRemove={onRemove}
+      />
+      <About />
+      <Footer />
+    </>
   );
 }
 

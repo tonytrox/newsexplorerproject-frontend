@@ -14,7 +14,7 @@ export async function createNewsData(keyword) {
     const to = today.toISOString();
 
     const res = await fetch(
-      `${BASE_URL}/everything?q=${keyword}&from=${from}&to=${to}&pageSize=10&apiKey=${NEWSAPI_KEY}`
+      `${BASE_URL}/everything?q=${keyword}&from=${from}&to=${to}&pageSize=50&apiKey=${NEWSAPI_KEY}`
     );
 
     if (!res.ok) {
@@ -24,7 +24,7 @@ export async function createNewsData(keyword) {
     const data = await res.json();
     // console.log('datos: ', today);
     // console.log('datos: ', weekAgo);
-    console.log('datos: ', data);
+    // console.log('datos: ', data);
     return data;
   } catch (error) {
     console.error('Error al obtener los datos:', error);

@@ -8,7 +8,7 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 // Función para simular un retraso
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function SearchForm({ cards, setCards }) {
+function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
   // buscar palabra clave
   const [keyword, setKeyword] = useState('');
   const [inputSearchError, setInputSearchError] = useState('');
@@ -110,9 +110,13 @@ function SearchForm({ cards, setCards }) {
       {!loading && error && <NotFoundResults title={error.title} message={error.message} />}
       {!loading && cards.length > 0 && (
         <NewsCardList
-          cards={cards.slice(0, visibleCards)}
+          title="Resultados de la búsqueda"
+          cards={cards.slice(0, visibleCards)} // props
           onShowMore={handleShowMore}
           hasMore={visibleCards < cards.length} // hay más tarjetas por mostrar ?
+          savedCards={savedCards}
+          onSave={onSave}
+          onRemove={onRemove}
         />
       )}
       {/* 'slice' es un método que devuelve una copia parcial del array original, sin modificarlo:

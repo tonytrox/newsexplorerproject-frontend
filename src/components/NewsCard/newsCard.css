@@ -111,6 +111,10 @@
   background-image: url('../../assets/bookmark-filled.svg');
 }
 
+.card__save-button_active:hover {
+  background-image: url('../../assets/bookmark-filled.svg');
+}
+
 @media (min-width: 768px) {
   .card__save-button {
     top: 8px;
