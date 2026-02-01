@@ -9,7 +9,6 @@ function Navigation() {
 
   return (
     <>
-      {/* Desktop navigation */}
       <nav className="site-navigation">
         <ul className="site-navigation__list">
           <li className="site-navigation__item">
@@ -31,7 +30,6 @@ function Navigation() {
         </ul>
       </nav>
 
-      {/* hamburger button */}
       <button
         className={`site-navigation__hamburger ${isSavedPage && 'site-navigation__hamburger--saved'}`}
         onClick={() => setIsMenuOpen(!isMenuOpen)}

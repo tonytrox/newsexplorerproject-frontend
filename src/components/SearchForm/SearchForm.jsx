@@ -9,37 +9,29 @@ import NewsCardList from '../NewsCardList/NewsCardList';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
-  // buscar palabra clave
   const [keyword, setKeyword] = useState('');
   const [inputSearchError, setInputSearchError] = useState('');
-  // preloader
   const [loading, setLoading] = useState(false);
-  // errores
   const [error, setError] = useState(null);
-  // news data
-  // const [cards, setCards] = useState([]); (SUBIO AL COMPONENTE PADRE)
-  // renderizar cada 3 items
   const [visibleCards, setVisibleCards] = useState(3);
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
 
     if (!keyword.trim()) {
-      // Si el campo está vacío, muestra un error y detén el flujo
       setInputSearchError('Por favor, introduzca una palabra clave');
       return;
     }
 
-    // Limpia cualquier error previo antes de iniciar una nueva búsqueda
     setError(null);
-    setLoading(true); // Activa el preloader
+    setLoading(true);
     setCards([]);
 
     try {
       const data = await createNewsData(keyword);
 
       await delay(2000);
-      // condicional
+
       if (keyword === 'none' || data.articles.length === 0) {
         throw new Error('KEYWORD_ERROR');
       }
@@ -48,10 +40,6 @@ function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
         throw new Error('SERVER_ERROR');
       }
 
-      console.log(data);
-      console.log('articles :', data.articles);
-
-      // Almacenar las tarjetas en el estado
       setCards(data.articles);
     } catch (err) {
       if (err.message === 'KEYWORD_ERROR') {
@@ -111,16 +99,14 @@ function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
       {!loading && cards.length > 0 && (
         <NewsCardList
           title="Resultados de la búsqueda"
-          cards={cards.slice(0, visibleCards)} // props
+          cards={cards.slice(0, visibleCards)}
           onShowMore={handleShowMore}
-          hasMore={visibleCards < cards.length} // hay más tarjetas por mostrar ?
+          hasMore={visibleCards < cards.length}
           savedCards={savedCards}
           onSave={onSave}
           onRemove={onRemove}
         />
       )}
-      {/* 'slice' es un método que devuelve una copia parcial del array original, sin modificarlo:
-      array.slice(inicio, fin) */}
     </>
   );
 }

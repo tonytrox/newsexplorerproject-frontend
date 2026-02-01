@@ -73,13 +73,14 @@
 
 @media (min-width: 1440px) {
   .news__container {
-    padding-top: 80px;
+    padding-top: 62px;
     padding-bottom: 80px;
   }
 
   .news__button {
     width: 288px;
     height: 64px;
+    margin-top: 64px;
   }
 
   .news__title {
