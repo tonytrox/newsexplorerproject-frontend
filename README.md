@@ -30,3 +30,10 @@ El proyecto está adaptado a las siguientes resoluciones:
 - 1440px
 
 Las transiciones entre resoluciones podrán optimizarse en entregas posteriores.
+Posteriormente se añadira la opcion de Login para que cada usuario pueda almacenar
+sus noticias destacadas.
+
+#### Para ejecutar el proyecto, clonar el repositorio local
+
+- pnpm install
+- pnpm dev
