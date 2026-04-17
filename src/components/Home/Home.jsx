@@ -4,9 +4,13 @@ import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 
+// importamos el componente para renderizado
+import Popup from '../PopupWithForm/PopupWithForm';
+
 function Home({ cards, setCards, savedCards, onSave, onRemove }) {
   return (
     <>
+      <Popup />
       <Header />
       <SearchForm
         cards={cards}
