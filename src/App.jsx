@@ -3,10 +3,14 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Home from './components/Home/Home';
 import SavedNews from './components/SavedNews/SaveNews';
+import PopupRegister from './components/PopupRegister/PopupRegister';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
+
+  // controla si el popup de registro está abierto
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
@@ -54,6 +58,14 @@ function App() {
             element={<SavedNews savedCards={savedCards} onRemove={handleRemoveCard} />}
           />
         </Routes>
+        <PopupRegister
+          isOpen={isRegisterOpen}
+          onClose={() => setIsRegisterOpen(false)}
+          onSwitchToLogin={() => {}}
+        />
+
+        {/* botón temporal para abrir el popup y visualizarlo */}
+        {/* <button onClick={() => setIsRegisterOpen(true)}>Abrir Register</button> */}
       </div>
     </div>
   );

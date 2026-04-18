@@ -10,7 +10,7 @@ import Popup from '../PopupWithForm/PopupWithForm';
 function Home({ cards, setCards, savedCards, onSave, onRemove }) {
   return (
     <>
-      <Popup />
+      {/* <Popup /> */}
       <Header />
       <SearchForm
         cards={cards}
