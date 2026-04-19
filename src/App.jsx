@@ -4,13 +4,17 @@ import './App.css';
 import Home from './components/Home/Home';
 import SavedNews from './components/SavedNews/SaveNews';
 import PopupRegister from './components/PopupRegister/PopupRegister';
+import PopupLogin from './components/PopupLogin/PopupLogin';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
 
   // controla si el popup de registro está abierto
-  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(true);
+
+  // estado para controlar si el popup de login está abierto
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
@@ -61,11 +65,20 @@ function App() {
         <PopupRegister
           isOpen={isRegisterOpen}
           onClose={() => setIsRegisterOpen(false)}
-          onSwitchToLogin={() => {}}
+          onSwitchToLogin={() => {
+            setIsRegisterOpen(false);
+            setIsLoginOpen(true);
+          }}
         />
 
-        {/* botón temporal para abrir el popup y visualizarlo */}
-        {/* <button onClick={() => setIsRegisterOpen(true)}>Abrir Register</button> */}
+        <PopupLogin
+          isOpen={isLoginOpen}
+          onClose={() => setIsLoginOpen(false)}
+          onSwitchToRegister={() => {
+            setIsLoginOpen(false);
+            setIsRegisterOpen(true);
+          }}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import './popupWithForm.css';
 
 const PopupWithForm = ({ isOpen, onClose, children }) => {
-  // if (!isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     // overlay oscuro, click fuera del modal lo cierra
