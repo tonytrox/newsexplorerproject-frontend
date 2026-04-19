@@ -5,16 +5,20 @@ import Home from './components/Home/Home';
 import SavedNews from './components/SavedNews/SaveNews';
 import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
+import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
 
   // controla si el popup de registro está abierto
-  const [isRegisterOpen, setIsRegisterOpen] = useState(true);
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
   // estado para controlar si el popup de login está abierto
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  // estado para controlar si el popup de éxito está abierto
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
@@ -77,6 +81,15 @@ function App() {
           onSwitchToRegister={() => {
             setIsLoginOpen(false);
             setIsRegisterOpen(true);
+          }}
+        />
+
+        <PopupSuccess
+          isOpen={isSuccessOpen}
+          onClose={() => setIsSuccessOpen(false)}
+          onSwitchToLogin={() => {
+            setIsSuccessOpen(false);
+            setIsLoginOpen(true);
           }}
         />
       </div>

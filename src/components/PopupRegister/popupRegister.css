@@ -1,8 +1,10 @@
 .popup__title {
-  font-size: 24px;
   margin: 0px;
   font-family: 'Roboto', sans-serif;
   font-weight: 900;
+  font-size: 24px;
+  width: 305px;
+  margin-bottom: 22px;
 }
 
 .popup__form {
@@ -15,7 +17,6 @@
 .popup__fields {
   display: flex;
   flex-direction: column;
-  padding-top: 22px;
   padding-bottom: 35px;
   gap: 30px;
 }
@@ -76,6 +77,8 @@
 }
 
 .popup__switch-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
   color: #2f71e5;
   cursor: pointer;
 }
