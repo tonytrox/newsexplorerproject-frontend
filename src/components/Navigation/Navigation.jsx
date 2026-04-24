@@ -2,6 +2,7 @@ import './navigation.css';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
+// recibe la prop y lo envia a la accion: onClick={}
 function Navigation({ onOpenLogin }) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-news';

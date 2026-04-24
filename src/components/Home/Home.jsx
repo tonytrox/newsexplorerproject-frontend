@@ -4,14 +4,12 @@ import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 
-// importamos el componente para renderizado
-import Popup from '../PopupWithForm/PopupWithForm';
-
-function Home({ cards, setCards, savedCards, onSave, onRemove }) {
+// Home recibe la prop y la pasa a Header:
+function Home({ cards, setCards, savedCards, onSave, onRemove, onOpenLogin }) {
   return (
     <>
-      {/* <Popup /> */}
-      <Header />
+      {/* pasa onOpenLogin a Header para que llegue al botón de Navigation */}
+      <Header onOpenLogin={onOpenLogin} />
       <SearchForm
         cards={cards}
         setCards={setCards}

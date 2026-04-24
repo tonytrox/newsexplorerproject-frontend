@@ -58,6 +58,8 @@ function App() {
                 savedCards={savedCards}
                 onSave={handleSaveCard}
                 onRemove={handleRemoveCard}
+                // define la función y la pasa a Home
+                onOpenLogin={() => setIsLoginOpen(true)}
               />
             }
           />
@@ -66,6 +68,7 @@ function App() {
             element={<SavedNews savedCards={savedCards} onRemove={handleRemoveCard} />}
           />
         </Routes>
+
         <PopupRegister
           isOpen={isRegisterOpen}
           onClose={() => setIsRegisterOpen(false)}
