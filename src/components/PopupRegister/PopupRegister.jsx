@@ -78,7 +78,7 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
         <button
           className="popup__button"
           type="submit"
-          // disabled={!email || !password || !name || emailError}
+          disabled={!email || !password || !name || emailError}
         >
           Inscribirse
         </button>
