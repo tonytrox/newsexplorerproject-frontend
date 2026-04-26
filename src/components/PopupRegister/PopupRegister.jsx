@@ -8,6 +8,25 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
+  const [emailError, setEmailError] = useState('');
+
+  // valida el email en tiempo real
+  const handleEmailBlur = (e) => {
+    if (!email) {
+      setEmailError('');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // .test() evalúa si el string cumple con el patrón regex
+    if (!emailRegex.test(email)) {
+      setEmailError('Dirección de correo electrónico no válida');
+    } else {
+      setEmailError('');
+    }
+  };
+
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose}>
       {/* título */}
@@ -24,8 +43,8 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
               placeholder="Introduce tu correo electrónico"
               // el input muestra lo que tiene el estado email
               value={email}
-              // cada tecla actualiza el estado
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} // solo actualiza, no valida
+              onBlur={handleEmailBlur} // valida cuando sale del campo
             />
           </label>
 
@@ -52,11 +71,15 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
           </label>
         </div>
 
-        {/* mensaje de error, solo se muestra si hay error */}
-        <span className="popup__error">Este correo electrónico no está disponible</span>
+        {/* muestra el error solo si existe */}
+        {emailError && <span className="popup__error">{emailError}</span>}
 
         {/* botón submit */}
-        <button className="popup__button" type="submit">
+        <button
+          className="popup__button"
+          type="submit"
+          // disabled={!email || !password || !name || emailError}
+        >
           Inscribirse
         </button>
 
