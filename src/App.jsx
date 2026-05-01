@@ -76,6 +76,10 @@ function App() {
             setIsRegisterOpen(false);
             setIsLoginOpen(true);
           }}
+          onOpenSuccess={() => {
+            setIsRegisterOpen(false);
+            setIsSuccessOpen(true);
+          }}
         />
 
         <PopupLogin

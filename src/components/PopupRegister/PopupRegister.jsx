@@ -1,8 +1,9 @@
+import './popupRegister.css';
 import { useState } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
-import './popupRegister.css';
+import { signup } from '../../utils/MainApi';
 
-const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
+const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
   // estado para cada campo del formulario
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,13 +28,27 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin }) => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // evita que el formulario recargue la página
+
+    try {
+      // llama a signup de MainApi.js con los datos del formulario
+      await signup(name, email, password);
+      onClose(); // cierra el popup de registro
+      onOpenSuccess(); // abre el popup de éxito
+    } catch (error) {
+      // si el servidor responde con error, muestra mensaje
+      setEmailError('Este correo electrónico no está disponible');
+    }
+  };
+
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose}>
       {/* título */}
       <h2 className="popup__title">Inscribirse</h2>
 
       {/* campos del formulario */}
-      <form className="popup__form">
+      <form className="popup__form" onSubmit={handleSubmit}>
         <div className="popup__fields">
           <label className="popup__label">
             Correo electrónico
