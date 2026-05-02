@@ -20,6 +20,9 @@ function App() {
   // estado para controlar si el popup de éxito está abierto
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 
+  // usuario actual
+  const [currentUser, setCurrentUser] = useState(null);
+
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
     try {
@@ -88,6 +91,10 @@ function App() {
           onSwitchToRegister={() => {
             setIsLoginOpen(false);
             setIsRegisterOpen(true);
+          }}
+          onLogin={(token) => {
+            setCurrentUser(token); // ya hay alguien conectado
+            setIsLoginOpen(false);
           }}
         />
 
