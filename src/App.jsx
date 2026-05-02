@@ -7,6 +7,9 @@ import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
+// agregar getUser al import de MainApi
+import { getUser } from '../src/utils/MainApi';
+
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
@@ -63,6 +66,7 @@ function App() {
                 onRemove={handleRemoveCard}
                 // define la función y la pasa a Home
                 onOpenLogin={() => setIsLoginOpen(true)}
+                currentUser={currentUser}
               />
             }
           />
@@ -92,9 +96,14 @@ function App() {
             setIsLoginOpen(false);
             setIsRegisterOpen(true);
           }}
-          onLogin={(token) => {
-            setCurrentUser(token); // ya hay alguien conectado
-            setIsLoginOpen(false);
+          onLogin={async (token) => {
+            try {
+              const userData = await getUser(token); // llama GET /users/me → { name, email }
+              setCurrentUser(userData); // guarda el objeto completo, no solo el token
+              setIsLoginOpen(false);
+            } catch (error) {
+              console.error('Error al obtener usuario:', error);
+            }
           }}
         />
 

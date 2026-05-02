@@ -3,7 +3,7 @@ import Navigation from '../Navigation/Navigation';
 import { useLocation, NavLink } from 'react-router-dom';
 
 // recibe la prop desde el componente Home
-function Header({ onOpenLogin }) {
+function Header({ onOpenLogin, currentUser }) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-news';
 
@@ -15,7 +15,7 @@ function Header({ onOpenLogin }) {
         </NavLink>
       </h1>
       {/* pasa onOpenLogin a Navigation */}
-      <Navigation onOpenLogin={onOpenLogin} />
+      <Navigation onOpenLogin={onOpenLogin} currentUser={currentUser} />
     </header>
   );
 }
