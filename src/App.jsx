@@ -41,27 +41,29 @@ function App() {
     localStorage.setItem('savedCards', JSON.stringify(savedCards));
   }, [savedCards]);
 
+  // al montar App, verifica si hay un token guardado en localStorage
+  useEffect(() => {
+    const checkUser = async () => {
+      const token = localStorage.getItem('token');
+
+      if (!token) return;
+
+      try {
+        const userData = await getUser(token);
+        setCurrentUser(userData); // restaura la sesión
+      } catch (error) {
+        localStorage.removeItem('token');
+      }
+    };
+
+    checkUser();
+  }, []); // ← [] garantiza que solo se ejecuta una vez al montar
+
   const handleSaveCard = (card) => {
     if (!savedCards.some((savedCard) => savedCard.title === card.title)) {
       setSavedCards([...savedCards, card]);
     }
   };
-
-  // al montar App, verifica si hay un token guardado
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (!token) return; // no hay sesión guardada, no hacemos nada
-
-    // si hay token, recuperamos los datos del usuario
-    getUser(token)
-      .then((userData) => {
-        setCurrentUser(userData); // restaura la sesión
-      })
-      .catch(() => {
-        localStorage.removeItem('token'); // token inválido o expirado, lo eliminamos
-      });
-  }, []); // [] = solo se ejecuta una vez al montar
 
   const handleRemoveCard = (card) => {
     setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
