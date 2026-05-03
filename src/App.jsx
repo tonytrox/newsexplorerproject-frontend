@@ -47,6 +47,22 @@ function App() {
     }
   };
 
+  // al montar App, verifica si hay un token guardado
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (!token) return; // no hay sesión guardada, no hacemos nada
+
+    // si hay token, recuperamos los datos del usuario
+    getUser(token)
+      .then((userData) => {
+        setCurrentUser(userData); // restaura la sesión
+      })
+      .catch(() => {
+        localStorage.removeItem('token'); // token inválido o expirado, lo eliminamos
+      });
+  }, []); // [] = solo se ejecuta una vez al montar
+
   const handleRemoveCard = (card) => {
     setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
   };
