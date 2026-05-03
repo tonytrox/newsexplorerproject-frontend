@@ -67,6 +67,12 @@ function App() {
     setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
   };
 
+  // CERRAR SESION
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // elimina el token
+    setCurrentUser(null); // resetea el estado → Header vuelve al estado público
+  };
+
   return (
     <div className="page">
       <div className="page__container">
@@ -83,6 +89,7 @@ function App() {
                 // define la función y la pasa a Home
                 onOpenLogin={() => setIsLoginOpen(true)}
                 currentUser={currentUser}
+                onLogout={handleLogout}
               />
             }
           />

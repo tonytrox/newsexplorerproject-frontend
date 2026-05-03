@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 // recibe la prop y lo envia a la accion: onClick={}
-function Navigation({ onOpenLogin, currentUser }) {
+function Navigation({ onOpenLogin, currentUser, onLogout }) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-news';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +33,9 @@ function Navigation({ onOpenLogin, currentUser }) {
                 </NavLink>
               </li>
               <li className="site-navigation__item">
-                <button className="site-navigation__login-btn">{currentUser.name} →</button>
+                <button className="site-navigation__login-btn" onClick={onLogout}>
+                  {currentUser.name} →
+                </button>
               </li>
             </>
           ) : (
