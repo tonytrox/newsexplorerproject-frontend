@@ -47,14 +47,6 @@ export const signin = async (email, password) => {
   }
 };
 
-// FLUJO:
-// res.ok es false
-// → throw new Error() crea el error
-// → catch lo captura
-// → console.error lo muestra en consola
-// → throw error lo pasa al componente
-// → el componente lo muestra al usuario
-
 // GET /users/me - obtener datos del usuario conectado
 // necesita el token para que el backend sepa quién está pidiendo los datos
 export const getUser = async (token) => {
@@ -74,6 +66,28 @@ export const getUser = async (token) => {
     return res.json(); // retorna { name, email }
   } catch (error) {
     console.error('Error en getUser:', error);
+    throw error;
+  }
+};
+
+// GET /articles - obtener artículos guardados del usuario
+export const getUserArticles = async (token) => {
+  try {
+    const res = await fetch(`${BASE_URL}/articles`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // ← identifica al usuario
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+
+    return res.json(); // retorna array de artículos [ {}, {}, ... ]
+  } catch (error) {
+    console.error('Error en getUserArticles:', error);
     throw error;
   }
 };
