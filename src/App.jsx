@@ -8,7 +8,7 @@ import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
 // agregar getUser al import de MainApi
-import { getUser } from '../src/utils/MainApi';
+import { getUser, getUserArticles } from '../src/utils/MainApi';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -51,6 +51,10 @@ function App() {
       try {
         const userData = await getUser(token);
         setCurrentUser(userData); // restaura la sesión
+
+        // prueba temporal — obtener artículos guardados
+        const articles = await getUserArticles(token);
+        // console.log('artículos del usuario:', articles);
       } catch (error) {
         localStorage.removeItem('token');
       }
