@@ -27,3 +27,22 @@ export async function createNewsData(keyword) {
     throw error;
   }
 }
+
+// El problema es que createArticle necesita estos campos específicos que el backend Local espera:
+// -> article.model.js (Schema)
+//  ---> keyword, title, text, date, source, link, image
+
+// Pero la tarjeta recibe estos campos de la NewsAPI ~ API EXT:
+//  ---> urlToImage, publishedAt, title, description, source, url
+
+// Hay que mapearlos !
+
+// NewsAPI          →    Backend
+// ─────────────────────────────
+// title            →    title
+// description      →    text
+// publishedAt      →    date
+// source.name      →    source
+// url              →    link
+// urlToImage       →    image
+// keyword          →    keyword  (lo tenemos del buscador)

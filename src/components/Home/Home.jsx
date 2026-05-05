@@ -14,6 +14,9 @@ function Home({
   onOpenLogin,
   currentUser,
   onLogout,
+  token,
+  keyword,
+  setKeyword,
 }) {
   return (
     <>
@@ -25,6 +28,9 @@ function Home({
         savedCards={savedCards}
         onSave={onSave}
         onRemove={onRemove}
+        token={token}
+        keyword={keyword}
+        setKeyword={setKeyword}
       />
       <About />
       <Footer />

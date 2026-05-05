@@ -2,7 +2,17 @@ import './newsCardList.css';
 
 import NewsCard from '../NewsCard/NewsCard';
 
-function NewsCardList({ title, cards, onShowMore, hasMore, savedCards, onSave, onRemove }) {
+function NewsCardList({
+  title,
+  cards,
+  onShowMore,
+  hasMore,
+  savedCards,
+  onSave,
+  onRemove,
+  token,
+  keyword,
+}) {
   return (
     <section className="news">
       <div className="news__container">
@@ -17,6 +27,8 @@ function NewsCardList({ title, cards, onShowMore, hasMore, savedCards, onSave, o
                 isSaved={isSaved}
                 onSave={onSave}
                 onRemove={onRemove}
+                token={token}
+                keyword={keyword}
               />
             );
           })}

@@ -7,8 +7,7 @@ import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
-// agregar getUser al import de MainApi
-import { getUser, getUserArticles } from '../src/utils/MainApi';
+import { getUser, getUserArticles, createArticle } from '../src/utils/MainApi';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -25,6 +24,8 @@ function App() {
 
   // usuario actual
   const [currentUser, setCurrentUser] = useState(null);
+
+  const [keyword, setKeyword] = useState('');
 
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
@@ -63,9 +64,20 @@ function App() {
     checkUser();
   }, []); // ← [] garantiza que solo se ejecuta una vez al montar
 
-  const handleSaveCard = (card) => {
-    if (!savedCards.some((savedCard) => savedCard.title === card.title)) {
-      setSavedCards([...savedCards, card]);
+  // const handleSaveCard = (card) => {
+  //   if (!savedCards.some((savedCard) => savedCard.title === card.title)) {
+  //     setSavedCards([...savedCards, card]);
+  //   }
+  // };
+
+  const handleSaveCard = async (article) => {
+    const token = localStorage.getItem('token');
+
+    try {
+      const savedArticle = await createArticle(token, article);
+      setSavedCards([...savedCards, savedArticle]); // agrega el artículo con su _id del backend
+    } catch (error) {
+      console.error('Error al guardar artículo:', error);
     }
   };
 
@@ -96,6 +108,9 @@ function App() {
                 onOpenLogin={() => setIsLoginOpen(true)}
                 currentUser={currentUser}
                 onLogout={handleLogout}
+                token={localStorage.getItem('token')}
+                keyword={keyword}
+                setKeyword={setKeyword}
               />
             }
           />

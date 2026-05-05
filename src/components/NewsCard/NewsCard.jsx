@@ -1,13 +1,37 @@
 import './newsCard.css';
 
 function NewsCard(props) {
-  const { urlToImage, publishedAt, title, description, source, isSaved, onSave, onRemove } = props;
+  const {
+    urlToImage,
+    publishedAt,
+    title,
+    description,
+    source,
+    url,
+    isSaved,
+    onSave,
+    onRemove,
+    token,
+    keyword,
+  } = props;
 
   const handleSaveBookmark = () => {
     if (isSaved) {
       onRemove({ urlToImage, publishedAt, title, description, source });
     } else {
-      onSave({ urlToImage, publishedAt, title, description, source });
+      // mapeo NewsAPI → backend
+      const article = {
+        keyword,
+        title,
+        text: description, // description → text
+        date: publishedAt, // publishedAt → date
+        source: source.name, // source.name → source
+        link: url, // url → link
+        image: urlToImage, // urlToImage → image
+      };
+
+      console.log('artículo a guardar:', article);
+      onSave(article); // llama a handleSaveCard en App que llama a createArticle
     }
   };
 
