@@ -91,3 +91,26 @@ export const getUserArticles = async (token) => {
     throw error;
   }
 };
+
+// POST /articles - guardar un artículo
+export const createArticle = async (token, article) => {
+  try {
+    const res = await fetch(`${BASE_URL}/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // ← identifica al usuario
+      },
+      body: JSON.stringify(article), // ← datos del artículo a guardar
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+
+    return res.json(); // retorna el artículo creado { _id, keyword, title, ... }
+  } catch (error) {
+    console.error('Error en createArticle:', error);
+    throw error;
+  }
+};
