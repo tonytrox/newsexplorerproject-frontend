@@ -114,3 +114,25 @@ export const createArticle = async (token, article) => {
     throw error;
   }
 };
+
+// DELETE /articles/:articleId - eliminar un artículo guardado
+export const deleteArticle = async (token, articleId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/articles/${articleId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // ← identifica al usuario
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Error: ${res.status}`);
+    }
+
+    return res.json(); // retorna el artículo eliminado
+  } catch (error) {
+    console.error('Error en deleteArticle:', error);
+    throw error;
+  }
+};
