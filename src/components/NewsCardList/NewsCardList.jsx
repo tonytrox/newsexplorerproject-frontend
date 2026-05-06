@@ -12,6 +12,7 @@ function NewsCardList({
   onRemove,
   token,
   keyword,
+  isSavedPage,
 }) {
   return (
     <section className="news">
@@ -29,6 +30,7 @@ function NewsCardList({
                 onRemove={onRemove}
                 token={token}
                 keyword={keyword}
+                isSavedPage={isSavedPage}
               />
             );
           })}

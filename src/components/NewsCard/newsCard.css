@@ -115,6 +115,14 @@
   background-image: url('../../assets/bookmark-filled.svg');
 }
 
+.card__save-button_delete {
+  background-image: url('../../assets/trash.svg');
+}
+
+.card__save-button_delete:hover {
+  background-image: url('../../assets/trash_fill.svg');
+}
+
 @media (min-width: 768px) {
   .card__save-button {
     top: 8px;

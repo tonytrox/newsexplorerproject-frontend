@@ -2,13 +2,19 @@ import './newsCard.css';
 
 function NewsCard(props) {
   const {
+    _id,
     urlToImage,
+    image,
     publishedAt,
+    date,
     title,
     description,
+    text,
     source,
     url,
+    link,
     isSaved,
+    isSavedPage,
     onSave,
     onRemove,
     token,
@@ -16,8 +22,10 @@ function NewsCard(props) {
   } = props;
 
   const handleSaveBookmark = () => {
-    if (isSaved) {
-      onRemove({ urlToImage, publishedAt, title, description, source });
+    if (isSavedPage) {
+      onRemove(_id);
+    } else if (isSaved) {
+      onRemove(_id);
     } else {
       // mapeo NewsAPI → backend
       const article = {
@@ -29,18 +37,16 @@ function NewsCard(props) {
         link: url, // url → link
         image: urlToImage, // urlToImage → image
       };
-
-      console.log('artículo a guardar:', article);
       onSave(article); // llama a handleSaveCard en App que llama a createArticle
     }
   };
 
   return (
     <li className="card">
-      <img src={urlToImage} className="card__image" />
+      <img src={isSavedPage ? image : urlToImage} className="card__image" />
       <div className="card__content">
         <p className="card__date">
-          {new Date(publishedAt).toLocaleDateString('es-ES', {
+          {new Date(isSavedPage ? date : publishedAt).toLocaleDateString('es-ES', {
             day: 'numeric',
             month: 'long',
             year: 'numeric',
@@ -48,10 +54,10 @@ function NewsCard(props) {
         </p>
         <h3 className="card__title">{title}</h3>
         <p className="card__text">{description}</p>
-        <p className="card__source">{source.name}</p>
+        <p className="card__source">{isSavedPage ? source : source.name}</p>
         <button
-          title="Inicia sesión para guardar artículos"
-          className={`card__save-button ${isSaved && 'card__save-button_active'}`}
+          title={isSavedPage ? 'Eliminar artículo' : 'Guardar artículo'}
+          className={`card__save-button ${isSavedPage ? 'card__save-button_delete' : isSaved && 'card__save-button_active'}`}
           onClick={handleSaveBookmark}
         ></button>
       </div>

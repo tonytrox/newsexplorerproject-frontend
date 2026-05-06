@@ -7,7 +7,7 @@ import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
-import { getUser, getUserArticles, createArticle } from '../src/utils/MainApi';
+import { getUser, getUserArticles, createArticle, deleteArticle } from '../src/utils/MainApi';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -81,8 +81,20 @@ function App() {
     }
   };
 
-  const handleRemoveCard = (card) => {
-    setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
+  // const handleRemoveCard = (card) => {
+  //   setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
+  // };
+
+  const handleRemoveCard = async (articleId) => {
+    const token = localStorage.getItem('token');
+
+    try {
+      await deleteArticle(token, articleId);
+      // filtra el artículo eliminado del estado local usando su _id
+      setSavedCards(savedCards.filter((card) => card._id !== articleId));
+    } catch (error) {
+      console.error('Error al eliminar artículo:', error);
+    }
   };
 
   // CERRAR SESION
@@ -116,7 +128,14 @@ function App() {
           />
           <Route
             path="/saved-news"
-            element={<SavedNews savedCards={savedCards} onRemove={handleRemoveCard} />}
+            element={
+              <SavedNews
+                savedCards={savedCards}
+                onRemove={handleRemoveCard}
+                currentUser={currentUser}
+                onLogout={handleLogout}
+              />
+            }
           />
         </Routes>
 
