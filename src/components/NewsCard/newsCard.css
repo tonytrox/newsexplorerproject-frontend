@@ -87,7 +87,7 @@
   color: #b6bcbf;
 }
 
-.card__save-button {
+.card__action-button {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -103,23 +103,23 @@
   cursor: pointer;
 }
 
-.card__save-button:hover {
+.card__action-button:hover {
   background-image: url('../../assets/bookmark-outline.svg');
 }
 
-.card__save-button_active {
+.card__action-button_saved {
   background-image: url('../../assets/bookmark-filled.svg');
 }
 
-.card__save-button_active:hover {
+.card__action-button_saved:hover {
   background-image: url('../../assets/bookmark-filled.svg');
 }
 
-.card__save-button_delete {
+.card__save-button_remove {
   background-image: url('../../assets/trash.svg');
 }
 
-.card__save-button_delete:hover {
+.card__save-button_remove:hover {
   background-image: url('../../assets/trash_fill.svg');
 }
 

@@ -38,7 +38,7 @@ function NewsCard({
         <p className="card__source">{source}</p>
         <button
           title={isSavedPage ? 'Eliminar artículo' : 'Guardar artículo'}
-          className={`card__save-button ${isSavedPage ? 'card__save-button_delete' : isSaved && 'card__save-button_active'}`}
+          className={`card__action-button ${isSavedPage ? 'card__save-button_remove' : isSaved && 'card__action-button_saved'}`}
           onClick={handleSaveBookmark}
         />
       </div>
