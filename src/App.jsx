@@ -7,19 +7,13 @@ import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 
-import { getUser, getUserArticles, createArticle, deleteArticle } from '../src/utils/MainApi';
+import { getUser, createArticle, deleteArticle } from '../src/utils/MainApi';
 
 function App() {
   const [cards, setCards] = useState([]);
   const [savedCards, setSavedCards] = useState([]);
-
-  // controla si el popup de registro está abierto
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  // estado para controlar si el popup de login está abierto
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-  // estado para controlar si el popup de éxito está abierto
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 
   // usuario actual
@@ -52,10 +46,6 @@ function App() {
       try {
         const userData = await getUser(token);
         setCurrentUser(userData); // restaura la sesión
-
-        // prueba temporal — obtener artículos guardados
-        const articles = await getUserArticles(token);
-        // console.log('artículos del usuario:', articles);
       } catch (error) {
         localStorage.removeItem('token');
       }
@@ -64,26 +54,20 @@ function App() {
     checkUser();
   }, []); // ← [] garantiza que solo se ejecuta una vez al montar
 
-  // const handleSaveCard = (card) => {
-  //   if (!savedCards.some((savedCard) => savedCard.title === card.title)) {
-  //     setSavedCards([...savedCards, card]);
-  //   }
-  // };
-
   const handleSaveCard = async (article) => {
     const token = localStorage.getItem('token');
 
     try {
       const savedArticle = await createArticle(token, article);
-      setSavedCards([...savedCards, savedArticle]); // agrega el artículo con su _id del backend
+      setSavedCards([...savedCards, savedArticle]); // agrega el artículo incluyendo su _id
+      // SPREAD (...) conserva los anteriores y agrega el nuevo Articulo al final
+      // le dice a JavaScript: "abre el array y saca todos sus elementos", para poder
+      // meterlos en uno nuevo junto con el artículo recién guardado.
+      // resultado: savedCards = [ artículo1, artículo2, artículo3~nuevo ]
     } catch (error) {
       console.error('Error al guardar artículo:', error);
     }
   };
-
-  // const handleRemoveCard = (card) => {
-  //   setSavedCards(savedCards.filter((savedCard) => savedCard.title !== card.title));
-  // };
 
   const handleRemoveCard = async (articleId) => {
     const token = localStorage.getItem('token');
@@ -97,7 +81,6 @@ function App() {
     }
   };
 
-  // CERRAR SESION
   const handleLogout = () => {
     localStorage.removeItem('token'); // elimina el token
     setCurrentUser(null); // resetea el estado → Header vuelve al estado público
@@ -184,3 +167,19 @@ function App() {
 }
 
 export default App;
+
+// App se monta
+//     ↓
+// savedCards = []  (inicia vacío)
+//     ↓
+// useEffect lee localStorage
+//     ↓
+// setSavedCards([...artículosGuardados])  (si había algo)
+//     ↓
+// usuario guarda un artículo
+//     ↓
+// setSavedCards([...savedCards, nuevoArticulo])  (agrega al final)
+//     ↓
+// usuario elimina un artículo
+//     ↓
+// setSavedCards(savedCards.filter(...))  (quita el eliminado)
