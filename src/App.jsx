@@ -8,7 +8,7 @@ import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 import CurrentUserContext from './contexts/CurrentUserContext';
 
-import { getUser, createArticle, deleteArticle } from '../src/utils/MainApi';
+import { getUser, getUserArticles, createArticle, deleteArticle } from '../src/utils/MainApi';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -47,6 +47,10 @@ function App() {
       try {
         const userData = await getUser(token);
         setCurrentUser(userData); // restaura la sesión
+
+        // carga los artículos guardados del usuario al restaurar sesión
+        const articles = await getUserArticles(token);
+        setSavedCards(articles);
       } catch (error) {
         localStorage.removeItem('token');
       }
@@ -150,6 +154,11 @@ function App() {
               try {
                 const userData = await getUser(token); // llama GET /users/me → { name, email }
                 setCurrentUser(userData); // guarda el objeto completo, no solo el token
+
+                // carga los artículos al iniciar sesión
+                const articles = await getUserArticles(token);
+                setSavedCards(articles);
+
                 setIsLoginOpen(false);
               } catch (error) {
                 console.error('Error al obtener usuario:', error);
