@@ -33,7 +33,9 @@ function NewsCard({
             year: 'numeric',
           })}
         </p>
-        <h3 className="card__title">{title}</h3>
+        <a href={link} target="_blank" rel="noreferrer" className="card__link">
+          <h3 className="card__title">{title}</h3>
+        </a>
         <p className="card__text">{text}</p>
         <p className="card__source">{source}</p>
         <button
