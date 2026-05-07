@@ -1,4 +1,6 @@
 import './newsCard.css';
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function NewsCard({
   _id,
@@ -14,7 +16,12 @@ function NewsCard({
   onSave,
   onRemove,
 }) {
+  // lee currentUser directamente del contexto
+  const currentUser = useContext(CurrentUserContext);
+
   const handleSaveBookmark = () => {
+    if (!currentUser) return; // sin sesión no hace nada
+
     if (isSavedPage) {
       onRemove(_id); // solo elimina del backend si estamos en saved-news
     } else if (!isSaved) {

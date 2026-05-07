@@ -12,7 +12,6 @@ function Home({
   onSave,
   onRemove,
   onOpenLogin,
-  currentUser,
   onLogout,
   token,
   keyword,
@@ -21,7 +20,7 @@ function Home({
   return (
     <>
       {/* pasa onOpenLogin a Header para que llegue al botón de Navigation */}
-      <Header onOpenLogin={onOpenLogin} currentUser={currentUser} onLogout={onLogout} />
+      <Header onOpenLogin={onOpenLogin} onLogout={onLogout} />
       <SearchForm
         cards={cards}
         setCards={setCards}

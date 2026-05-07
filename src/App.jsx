@@ -105,7 +105,6 @@ function App() {
                   onRemove={handleRemoveCard}
                   // define la función y la pasa a Home
                   onOpenLogin={() => setIsLoginOpen(true)}
-                  currentUser={currentUser}
                   onLogout={handleLogout}
                   token={localStorage.getItem('token')}
                   keyword={keyword}

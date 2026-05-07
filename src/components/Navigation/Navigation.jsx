@@ -1,10 +1,13 @@
 import './navigation.css';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 // recibe la prop y lo envia a la accion: onClick={}
-function Navigation({ onOpenLogin, currentUser, onLogout }) {
+function Navigation({ onOpenLogin, onLogout }) {
   const location = useLocation();
+  const currentUser = useContext(CurrentUserContext);
   const isSavedPage = location.pathname === '/saved-news';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
