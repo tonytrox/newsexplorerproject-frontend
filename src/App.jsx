@@ -6,6 +6,7 @@ import SavedNews from './components/SavedNews/SaveNews';
 import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
+import CurrentUserContext from './contexts/CurrentUserContext';
 
 import { getUser, createArticle, deleteArticle } from '../src/utils/MainApi';
 
@@ -87,82 +88,86 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <div className="page__container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                cards={cards}
-                setCards={setCards}
-                savedCards={savedCards}
-                onSave={handleSaveCard}
-                onRemove={handleRemoveCard}
-                // define la función y la pasa a Home
-                onOpenLogin={() => setIsLoginOpen(true)}
-                currentUser={currentUser}
-                onLogout={handleLogout}
-                token={localStorage.getItem('token')}
-                keyword={keyword}
-                setKeyword={setKeyword}
-              />
-            }
-          />
-          <Route
-            path="/saved-news"
-            element={
-              <SavedNews
-                savedCards={savedCards}
-                onRemove={handleRemoveCard}
-                currentUser={currentUser}
-                onLogout={handleLogout}
-              />
-            }
-          />
-        </Routes>
+    // Provider es el componente que hace disponible el valor del contexto a todos sus hijos.
+    // Cuando 'currentUser' cambie, todos los componentes que lo usen se actualizarán automáticamente.
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__container">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  cards={cards}
+                  setCards={setCards}
+                  savedCards={savedCards}
+                  onSave={handleSaveCard}
+                  onRemove={handleRemoveCard}
+                  // define la función y la pasa a Home
+                  onOpenLogin={() => setIsLoginOpen(true)}
+                  currentUser={currentUser}
+                  onLogout={handleLogout}
+                  token={localStorage.getItem('token')}
+                  keyword={keyword}
+                  setKeyword={setKeyword}
+                />
+              }
+            />
+            <Route
+              path="/saved-news"
+              element={
+                <SavedNews
+                  savedCards={savedCards}
+                  onRemove={handleRemoveCard}
+                  currentUser={currentUser}
+                  onLogout={handleLogout}
+                />
+              }
+            />
+          </Routes>
 
-        <PopupRegister
-          isOpen={isRegisterOpen}
-          onClose={() => setIsRegisterOpen(false)}
-          onSwitchToLogin={() => {
-            setIsRegisterOpen(false);
-            setIsLoginOpen(true);
-          }}
-          onOpenSuccess={() => {
-            setIsRegisterOpen(false);
-            setIsSuccessOpen(true);
-          }}
-        />
+          <PopupRegister
+            isOpen={isRegisterOpen}
+            onClose={() => setIsRegisterOpen(false)}
+            onSwitchToLogin={() => {
+              setIsRegisterOpen(false);
+              setIsLoginOpen(true);
+            }}
+            onOpenSuccess={() => {
+              setIsRegisterOpen(false);
+              setIsSuccessOpen(true);
+            }}
+          />
 
-        <PopupLogin
-          isOpen={isLoginOpen}
-          onClose={() => setIsLoginOpen(false)}
-          onSwitchToRegister={() => {
-            setIsLoginOpen(false);
-            setIsRegisterOpen(true);
-          }}
-          onLogin={async (token) => {
-            try {
-              const userData = await getUser(token); // llama GET /users/me → { name, email }
-              setCurrentUser(userData); // guarda el objeto completo, no solo el token
+          <PopupLogin
+            isOpen={isLoginOpen}
+            onClose={() => setIsLoginOpen(false)}
+            onSwitchToRegister={() => {
               setIsLoginOpen(false);
-            } catch (error) {
-              console.error('Error al obtener usuario:', error);
-            }
-          }}
-        />
+              setIsRegisterOpen(true);
+            }}
+            onLogin={async (token) => {
+              try {
+                const userData = await getUser(token); // llama GET /users/me → { name, email }
+                setCurrentUser(userData); // guarda el objeto completo, no solo el token
+                setIsLoginOpen(false);
+              } catch (error) {
+                console.error('Error al obtener usuario:', error);
+              }
+            }}
+          />
 
-        <PopupSuccess
-          isOpen={isSuccessOpen}
-          onClose={() => setIsSuccessOpen(false)}
-          onSwitchToLogin={() => {
-            setIsSuccessOpen(false);
-            setIsLoginOpen(true);
-          }}
-        />
+          <PopupSuccess
+            isOpen={isSuccessOpen}
+            onClose={() => setIsSuccessOpen(false)}
+            onSwitchToLogin={() => {
+              setIsSuccessOpen(false);
+              setIsLoginOpen(true);
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </CurrentUserContext.Provider>
   );
 }
 
