@@ -7,6 +7,7 @@ import PopupRegister from './components/PopupRegister/PopupRegister';
 import PopupLogin from './components/PopupLogin/PopupLogin';
 import PopupSuccess from './components/PopupSuccess/PopupSuccess';
 import CurrentUserContext from './contexts/CurrentUserContext';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 import { getUser, getUserArticles, createArticle, deleteArticle } from '../src/utils/MainApi';
 
@@ -21,6 +22,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   const [keyword, setKeyword] = useState('');
+
+  const [isLoading, setIsLoading] = useState(true); // ← nuevo estado
 
   // Leer datos del localStorage al montar el componente
   useEffect(() => {
@@ -42,7 +45,10 @@ function App() {
     const checkUser = async () => {
       const token = localStorage.getItem('token');
 
-      if (!token) return;
+      if (!token) {
+        setIsLoading(false); // no hay token, termina la carga
+        return;
+      }
 
       try {
         const userData = await getUser(token);
@@ -53,6 +59,8 @@ function App() {
         setSavedCards(articles);
       } catch (error) {
         localStorage.removeItem('token');
+      } finally {
+        setIsLoading(false); // siempre termina la carga
       }
     };
 
@@ -120,11 +128,16 @@ function App() {
             <Route
               path="/saved-news"
               element={
-                <SavedNews
-                  savedCards={savedCards}
-                  onRemove={handleRemoveCard}
-                  currentUser={currentUser}
-                  onLogout={handleLogout}
+                <ProtectedRoute
+                  element={
+                    <SavedNews
+                      savedCards={savedCards}
+                      onRemove={handleRemoveCard}
+                      currentUser={currentUser}
+                      onLogout={handleLogout}
+                    />
+                  }
+                  isLoading={isLoading}
                 />
               }
             />
