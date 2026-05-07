@@ -7,7 +7,7 @@ function SavedNews({ savedCards, onRemove, currentUser, onLogout }) {
   return (
     <main className="saved-news">
       <Header currentUser={currentUser} onLogout={onLogout} />
-      <SavedNewsHeader />
+      <SavedNewsHeader savedCards={savedCards} />
       <NewsCardList
         cards={savedCards}
         savedCards={savedCards}
