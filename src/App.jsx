@@ -85,6 +85,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('token'); // elimina el token
     setCurrentUser(null); // resetea el estado → Header vuelve al estado público
+    setSavedCards([]); // ← limpiar artículos guardados al cerrar sesión
   };
 
   return (
