@@ -1,6 +1,6 @@
 import './newsCardList.css';
-
 import NewsCard from '../NewsCard/NewsCard';
+import { normalizeArticle } from '../../utils/normalizeArticle';
 
 function NewsCardList({
   title,
@@ -10,7 +10,6 @@ function NewsCardList({
   savedCards,
   onSave,
   onRemove,
-  token,
   keyword,
   isSavedPage,
 }) {
@@ -20,17 +19,21 @@ function NewsCardList({
         {title && <h2 className="news__title">{title}</h2>}
         <ul className="news__list">
           {cards.map((itemNews, index) => {
-            const isSaved = savedCards.some((savedCard) => savedCard.title === itemNews.title);
+            // normalizamos antes de pasar a NewsCard
+            // así NewsCard siempre recibe el mismo formato
+            const article = normalizeArticle(itemNews, keyword);
+            const isSaved = savedCards
+              ? savedCards.some((savedCard) => savedCard.title === article.title)
+              : false;
+
             return (
               <NewsCard
                 key={index}
-                {...itemNews}
+                {...article} // ← datos normalizados
                 isSaved={isSaved}
+                isSavedPage={isSavedPage}
                 onSave={onSave}
                 onRemove={onRemove}
-                token={token}
-                keyword={keyword}
-                isSavedPage={isSavedPage}
               />
             );
           })}
