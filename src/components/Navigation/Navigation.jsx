@@ -18,7 +18,7 @@ function Navigation({ onOpenLogin, onLogout }) {
           <li className="site-navigation__item">
             <NavLink
               to="/"
-              className={`site-navigation__link ${isSavedPage && `site-navigation__link--saved`}`}
+              className={`site-navigation__link ${isSavedPage && `site-navigation__link-saved`}`}
             >
               Inicio
             </NavLink>
@@ -30,13 +30,16 @@ function Navigation({ onOpenLogin, onLogout }) {
               <li className="site-navigation__item site-navigation__item--link">
                 <NavLink
                   to="/saved-news"
-                  className={`site-navigation__link ${isSavedPage && `site-navigation__link--saved`}`}
+                  className={`site-navigation__link ${isSavedPage && `site-navigation__link-saved`}`}
                 >
                   Artículos guardados
                 </NavLink>
               </li>
               <li className="site-navigation__item">
-                <button className="site-navigation__logout-btn" onClick={onLogout}>
+                <button
+                  className={`site-navigation__buttom ${isSavedPage && `site-navigation__buttom-logout`}`}
+                  onClick={onLogout}
+                >
                   {currentUser.name}
                   <svg
                     width="24"
@@ -57,7 +60,10 @@ function Navigation({ onOpenLogin, onLogout }) {
             </>
           ) : (
             <li className="site-navigation__item">
-              <button className="site-navigation__login-btn" onClick={onOpenLogin}>
+              <button
+                className="site-navigation__buttom site-navigation__buttom-login"
+                onClick={onOpenLogin}
+              >
                 Iniciar sesión
               </button>
             </li>
@@ -108,6 +114,15 @@ function Navigation({ onOpenLogin, onLogout }) {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Artículos guardados
+                </NavLink>
+              </li>
+              <li className="site-navigation__item">
+                <NavLink
+                  to="/saved-news"
+                  className="site-navigation__link--mobile"
+                  onClick={onOpenLogin}
+                >
+                  Iniciar Sesion
                 </NavLink>
               </li>
             </ul>

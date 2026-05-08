@@ -31,7 +31,7 @@
   border-bottom: 3px solid #ffffff;
 }
 
-.site-navigation__link--saved:hover {
+.site-navigation__link-saved:hover {
   color: #1a1b22;
   border-bottom: 3px solid #1a1b22;
 }
@@ -41,17 +41,14 @@
   cursor: pointer;
 }
 
-.site-navigation__login-btn {
+.site-navigation__buttom {
   height: 48px;
   padding: 0 20px;
-
-  color: #ffffff;
-  border: 1px solid #ffffff;
+  color: #b6bcbf;
+  border-color: #b6bcbf;
   background: transparent;
   border-radius: 100px;
-  /* transition: width 0.4s ease;
-  text-decoration: none; */
-
+  text-decoration: none;
   font-weight: inherit;
   font-size: 17px;
   display: flex;
@@ -61,25 +58,20 @@
   gap: 8px;
 }
 
-.site-navigation__logout-btn {
-  height: 48px;
-  padding: 0 20px;
-
+.site-navigation__buttom:hover {
   color: #ffffff;
-  border: 1px solid #ffffff;
-  background: transparent;
-  border-radius: 100px;
-  /* transition: width 0.4s ease;
-  text-decoration: none; */
+  border: 2px solid #ffffff;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.4);
+}
 
-  font-weight: inherit;
-  font-size: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  gap: 8px;
-  /* color: #1a1b22; */
+.site-navigation__buttom-login {
+  border: 1px solid #b6bcbf;
+  color: #b6bcbf;
+}
+
+.site-navigation__buttom-logout:hover {
+  border: 2px solid #1a1b22;
+  color: #1a1b22;
 }
 
 @media (max-width: 768px) {
@@ -136,5 +128,17 @@
 
   .site-navigation__link--mobile:hover {
     color: #ffffff;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-navigation__link {
+    height: 66px;
+    line-height: 24px;
+    text-decoration: none;
+    color: #b6bcbf;
+    display: flex;
+    align-items: center;
+    padding: 0 13px;
   }
 }
