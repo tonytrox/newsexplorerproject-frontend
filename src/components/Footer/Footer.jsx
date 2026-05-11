@@ -12,7 +12,7 @@ function Footer() {
         <nav className="footer__links-wrapper">
           <ul className="footer__nav">
             <li>
-              <a href="#" className="footer__nav-item" target="_blank">
+              <a href="/" className="footer__nav-item">
                 Inicio
               </a>
             </li>

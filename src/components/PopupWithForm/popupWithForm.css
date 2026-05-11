@@ -14,25 +14,38 @@
 
 /* contenedor blanco del modal */
 .popup__container {
-  background: white;
-  width: 430px;
-  /* height: 458px; */
-  border-radius: 16px;
-  padding: 34px 36px 28px 36px;
   position: relative;
+  background: white;
+  width: 320px;
+  border-radius: 16px;
+  padding: 16px;
 }
 
 /* botón X para cerrar */
 .popup__close {
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  bottom: calc(100% + 6px);
-  left: calc(100% + 6px);
+  top: -40px;
+  right: 4px;
   cursor: pointer;
   border: none;
   background-image: url(../../assets/button-close.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .popup__container {
+    width: 430px;
+    padding: 34px 36px 28px 36px;
+  }
+
+  .popup__close {
+    width: 40px;
+    height: 40px;
+    bottom: calc(100% + 6px);
+    left: calc(100% + 6px);
+  }
 }
