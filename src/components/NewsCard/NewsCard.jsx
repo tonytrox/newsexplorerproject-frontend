@@ -32,6 +32,10 @@ function NewsCard({
   return (
     <li className="card">
       <img src={image} className="card__image" alt={title} />
+
+      {/* badge de palabra clave — solo en saved-news */}
+      {isSavedPage && keyword && <span className="card__keyword">{keyword}</span>}
+
       <div className="card__content">
         <p className="card__date">
           {new Date(date).toLocaleDateString('es-ES', {
