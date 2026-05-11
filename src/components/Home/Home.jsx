@@ -4,7 +4,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
 import Footer from '../Footer/Footer';
 
-// Home recibe la prop y la pasa a Header:
 function Home({
   cards,
   setCards,
@@ -19,7 +18,6 @@ function Home({
 }) {
   return (
     <>
-      {/* pasa onOpenLogin a Header para que llegue al botón de Navigation */}
       <Header onOpenLogin={onOpenLogin} onLogout={onLogout} />
       <SearchForm
         cards={cards}

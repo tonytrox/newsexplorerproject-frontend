@@ -19,8 +19,6 @@ function NewsCardList({
         {title && <h2 className="news__title">{title}</h2>}
         <ul className="news__list">
           {cards.map((itemNews, index) => {
-            // normalizamos antes de pasar a NewsCard
-            // así NewsCard siempre recibe el mismo formato
             const article = normalizeArticle(itemNews, keyword);
             const isSaved = savedCards
               ? savedCards.some((savedCard) => savedCard.title === article.title)
@@ -29,7 +27,7 @@ function NewsCardList({
             return (
               <NewsCard
                 key={index}
-                {...article} // ← datos normalizados
+                {...article}
                 isSaved={isSaved}
                 isSavedPage={isSavedPage}
                 onSave={onSave}

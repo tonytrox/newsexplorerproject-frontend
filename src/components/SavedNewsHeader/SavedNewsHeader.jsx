@@ -5,10 +5,8 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 function SavedNewsHeader({ savedCards }) {
   const currentUser = useContext(CurrentUserContext);
 
-  // extrae keywords únicas de los artículos guardados
   const keywords = [...new Set(savedCards.map((card) => card.keyword))];
 
-  // muestra máximo 3 keywords, el resto como "y N más"
   const visibleKeywords = keywords.slice(0, 3).join(', ');
   const extraCount = keywords.length - 3;
   const keywordsText = extraCount > 0 ? `${visibleKeywords}, y ${extraCount} más` : visibleKeywords;

@@ -5,12 +5,9 @@ const PopupWithForm = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="popup__overlay">
-      {/* contenedor del modal, stopPropagation evita que el click dentro del modal lo cierre */}
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>
-        {/* botón X para cerrar */}
         <button type="button" className="popup__close" onClick={onClose} />
 
-        {/* contenido variable: título, campos, botón, span → vienen del componente hijo */}
         {children}
       </div>
     </div>

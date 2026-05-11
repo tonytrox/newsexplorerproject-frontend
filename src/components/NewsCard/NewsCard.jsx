@@ -16,14 +16,13 @@ function NewsCard({
   onSave,
   onRemove,
 }) {
-  // lee currentUser directamente del contexto
   const currentUser = useContext(CurrentUserContext);
 
   const handleSaveBookmark = () => {
-    if (!currentUser) return; // sin sesión no hace nada
+    if (!currentUser) return;
 
     if (isSavedPage) {
-      onRemove(_id); // solo elimina del backend si estamos en saved-news
+      onRemove(_id);
     } else if (!isSaved) {
       onSave({ image, date, title, text, source, link, keyword });
     }
@@ -33,7 +32,6 @@ function NewsCard({
     <li className="card">
       <img src={image} className="card__image" alt={title} />
 
-      {/* badge de palabra clave — solo en saved-news */}
       {isSavedPage && keyword && <span className="card__keyword">{keyword}</span>}
 
       <div className="card__content">

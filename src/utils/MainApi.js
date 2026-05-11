@@ -1,10 +1,5 @@
-// dirección de tu backend
 const BASE_URL = 'http://localhost:3000';
 
-// Sintaxis moderna: Arrow Function
-// export const nombreFuncion = async (params) => { ... }
-
-// POST /signup - registrar usuario
 export const signup = async (name, email, password) => {
   try {
     const res = await fetch(`${BASE_URL}/signup`, {
@@ -13,21 +8,17 @@ export const signup = async (name, email, password) => {
       body: JSON.stringify({ name, email, password }),
     });
 
-    // throw 1: crea y lanza un error nuevo con el status HTTP
     if (!res.ok) {
-      throw new Error(`Error: ${res.status}`); // ← crea el error
+      throw new Error(`Error: ${res.status}`);
     }
 
     return res.json();
-
-    // throw 2: relanza el error que capturó el catch
   } catch (error) {
     console.error('Error en signup:', error);
-    throw error; // ← lo pasa hacia arriba al componente que llamó signup
+    throw error;
   }
 };
 
-// POST /signin - iniciar sesión
 export const signin = async (email, password) => {
   try {
     const res = await fetch(`${BASE_URL}/signin`, {
@@ -40,22 +31,20 @@ export const signin = async (email, password) => {
       throw new Error(`Error: ${res.status}`);
     }
 
-    return res.json(); // retorna un { token: "eyJhbGci..." } que el FrontEnd guardará en localStorage
+    return res.json();
   } catch (error) {
     console.error('Error en signin:', error);
     throw error;
   }
 };
 
-// GET /users/me - obtener datos del usuario conectado
-// necesita el token para que el backend sepa quién está pidiendo los datos
 export const getUser = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/users/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // ← le decimos al backend quién somos
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -63,21 +52,20 @@ export const getUser = async (token) => {
       throw new Error(`Error: ${res.status}`);
     }
 
-    return res.json(); // retorna { name, email }
+    return res.json();
   } catch (error) {
     console.error('Error en getUser:', error);
     throw error;
   }
 };
 
-// GET /articles - obtener artículos guardados del usuario
 export const getUserArticles = async (token) => {
   try {
     const res = await fetch(`${BASE_URL}/articles`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // ← identifica al usuario
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -85,44 +73,42 @@ export const getUserArticles = async (token) => {
       throw new Error(`Error: ${res.status}`);
     }
 
-    return res.json(); // retorna array de artículos [ {}, {}, ... ]
+    return res.json();
   } catch (error) {
     console.error('Error en getUserArticles:', error);
     throw error;
   }
 };
 
-// POST /articles - guardar un artículo
 export const createArticle = async (token, article) => {
   try {
     const res = await fetch(`${BASE_URL}/articles`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // ← identifica al usuario
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(article), // ← datos del artículo a guardar
+      body: JSON.stringify(article),
     });
 
     if (!res.ok) {
       throw new Error(`Error: ${res.status}`);
     }
 
-    return res.json(); // retorna el artículo creado { _id, keyword, title, ... }
+    return res.json();
   } catch (error) {
     console.error('Error en createArticle:', error);
     throw error;
   }
 };
 
-// DELETE /articles/:articleId - eliminar un artículo guardado
 export const deleteArticle = async (token, articleId) => {
   try {
     const res = await fetch(`${BASE_URL}/articles/${articleId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`, // ← identifica al usuario
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -130,7 +116,7 @@ export const deleteArticle = async (token, articleId) => {
       throw new Error(`Error: ${res.status}`);
     }
 
-    return res.json(); // retorna el artículo eliminado
+    return res.json();
   } catch (error) {
     console.error('Error en deleteArticle:', error);
     throw error;

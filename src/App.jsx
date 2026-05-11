@@ -18,14 +18,11 @@ function App() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
 
-  // usuario actual
   const [currentUser, setCurrentUser] = useState(null);
 
   const [keyword, setKeyword] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(true); // ← nuevo estado
-
-  // Leer datos del localStorage al montar el componente
   useEffect(() => {
     try {
       const savedCardsNews = JSON.parse(localStorage.getItem('savedCards')) || [];
@@ -35,48 +32,41 @@ function App() {
     }
   }, []);
 
-  // Guardar tarjetas en localStorage cuando cambien
   useEffect(() => {
     localStorage.setItem('savedCards', JSON.stringify(savedCards));
   }, [savedCards]);
 
-  // al montar App, verifica si hay un token guardado en localStorage
   useEffect(() => {
     const checkUser = async () => {
       const token = localStorage.getItem('token');
 
       if (!token) {
-        setIsLoading(false); // no hay token, termina la carga
+        setIsLoading(false);
         return;
       }
 
       try {
         const userData = await getUser(token);
-        setCurrentUser(userData); // restaura la sesión
+        setCurrentUser(userData);
 
-        // carga los artículos guardados del usuario al restaurar sesión
         const articles = await getUserArticles(token);
         setSavedCards(articles);
       } catch (error) {
         localStorage.removeItem('token');
       } finally {
-        setIsLoading(false); // siempre termina la carga
+        setIsLoading(false);
       }
     };
 
     checkUser();
-  }, []); // ← [] garantiza que solo se ejecuta una vez al montar
+  }, []);
 
   const handleSaveCard = async (article) => {
     const token = localStorage.getItem('token');
 
     try {
       const savedArticle = await createArticle(token, article);
-      setSavedCards([...savedCards, savedArticle]); // agrega el artículo incluyendo su _id
-      // SPREAD (...) conserva los anteriores y agrega el nuevo Articulo al final
-      // le dice a JavaScript: "abre el array y saca todos sus elementos", para poder
-      // meterlos en uno nuevo junto con el artículo recién guardado.
-      // resultado: savedCards = [ artículo1, artículo2, artículo3~nuevo ]
+      setSavedCards([...savedCards, savedArticle]);
     } catch (error) {
       console.error('Error al guardar artículo:', error);
     }
@@ -87,7 +77,7 @@ function App() {
 
     try {
       await deleteArticle(token, articleId);
-      // filtra el artículo eliminado del estado local usando su _id
+
       setSavedCards(savedCards.filter((card) => card._id !== articleId));
     } catch (error) {
       console.error('Error al eliminar artículo:', error);
@@ -95,14 +85,12 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // elimina el token
-    setCurrentUser(null); // resetea el estado → Header vuelve al estado público
-    setSavedCards([]); // ← limpiar artículos guardados al cerrar sesión
+    localStorage.removeItem('token');
+    setCurrentUser(null);
+    setSavedCards([]);
   };
 
   return (
-    // Provider es el componente que hace disponible el valor del contexto a todos sus hijos.
-    // Cuando 'currentUser' cambie, todos los componentes que lo usen se actualizarán automáticamente.
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__container">
@@ -116,7 +104,6 @@ function App() {
                   savedCards={savedCards}
                   onSave={handleSaveCard}
                   onRemove={handleRemoveCard}
-                  // define la función y la pasa a Home
                   onOpenLogin={() => setIsLoginOpen(true)}
                   onLogout={handleLogout}
                   token={localStorage.getItem('token')}
@@ -165,10 +152,9 @@ function App() {
             }}
             onLogin={async (token) => {
               try {
-                const userData = await getUser(token); // llama GET /users/me → { name, email }
-                setCurrentUser(userData); // guarda el objeto completo, no solo el token
+                const userData = await getUser(token);
+                setCurrentUser(userData);
 
-                // carga los artículos al iniciar sesión
                 const articles = await getUserArticles(token);
                 setSavedCards(articles);
 
@@ -194,19 +180,3 @@ function App() {
 }
 
 export default App;
-
-// App se monta
-//     ↓
-// savedCards = []  (inicia vacío)
-//     ↓
-// useEffect lee localStorage
-//     ↓
-// setSavedCards([...artículosGuardados])  (si había algo)
-//     ↓
-// usuario guarda un artículo
-//     ↓
-// setSavedCards([...savedCards, nuevoArticulo])  (agrega al final)
-//     ↓
-// usuario elimina un artículo
-//     ↓
-// setSavedCards(savedCards.filter(...))  (quita el eliminado)

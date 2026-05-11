@@ -4,14 +4,12 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { signup } from '../../utils/MainApi';
 
 const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
-  // estado para cada campo del formulario
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
   const [emailError, setEmailError] = useState('');
 
-  // valida el email en tiempo real
   const handleEmailBlur = (e) => {
     if (!email) {
       setEmailError('');
@@ -20,7 +18,6 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
 
     const emailRegex = /^[^\s@]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // .test() evalúa si el string cumple con el patrón regex
     if (!emailRegex.test(email)) {
       setEmailError('Dirección de correo electrónico no válida');
     } else {
@@ -29,25 +26,21 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // evita que el formulario recargue la página
+    e.preventDefault();
 
     try {
-      // llama a signup de MainApi.js con los datos del formulario
       await signup(name, email, password);
-      onClose(); // cierra el popup de registro
-      onOpenSuccess(); // abre el popup de éxito
+      onClose();
+      onOpenSuccess();
     } catch (error) {
-      // si el servidor responde con error, muestra mensaje
       setEmailError('Este correo electrónico no está disponible');
     }
   };
 
   return (
     <PopupWithForm isOpen={isOpen} onClose={onClose}>
-      {/* título */}
       <h2 className="popup__title">Inscribirse</h2>
 
-      {/* campos del formulario */}
       <form className="popup__form" onSubmit={handleSubmit}>
         <div className="popup__fields">
           <label className="popup__label">
@@ -56,10 +49,9 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
               className="popup__input"
               type="email"
               placeholder="Introduce tu correo electrónico"
-              // el input muestra lo que tiene el estado email
               value={email}
-              onChange={(e) => setEmail(e.target.value)} // solo actualiza, no valida
-              onBlur={handleEmailBlur} // valida cuando sale del campo
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleEmailBlur}
             />
           </label>
 
@@ -86,10 +78,8 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
           </label>
         </div>
 
-        {/* muestra el error solo si existe */}
         {emailError && <span className="popup__error">{emailError}</span>}
 
-        {/* botón submit */}
         <button
           className="popup__button"
           type="submit"
@@ -98,7 +88,6 @@ const PopupRegister = ({ isOpen, onClose, onSwitchToLogin, onOpenSuccess }) => {
           Inscribirse
         </button>
 
-        {/* enlace para cambiar a Login */}
         <p className="popup__switch">
           o{' '}
           <span className="popup__switch-link" onClick={onSwitchToLogin}>

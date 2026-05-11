@@ -4,7 +4,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-// recibe la prop y lo envia a la accion: onClick={}
 function Navigation({ onOpenLogin, onLogout }) {
   const location = useLocation();
   const currentUser = useContext(CurrentUserContext);
@@ -23,8 +22,7 @@ function Navigation({ onOpenLogin, onLogout }) {
               Inicio
             </NavLink>
           </li>
-          {/* OPERADOR TERNARIO: */}
-          {/* {currentUser ? <NavAutenticada /> : <NavPublica />} */}
+
           {currentUser ? (
             <>
               <li className="site-navigation__item site-navigation__item--link">
