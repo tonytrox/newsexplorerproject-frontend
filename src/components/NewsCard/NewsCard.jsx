@@ -1,35 +1,57 @@
 import './newsCard.css';
+import { useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-function NewsCard(props) {
-  const { urlToImage, publishedAt, title, description, source, isSaved, onSave, onRemove } = props;
+function NewsCard({
+  _id,
+  image,
+  date,
+  title,
+  text,
+  source,
+  link,
+  keyword,
+  isSaved,
+  isSavedPage,
+  onSave,
+  onRemove,
+}) {
+  const currentUser = useContext(CurrentUserContext);
 
   const handleSaveBookmark = () => {
-    if (isSaved) {
-      onRemove({ urlToImage, publishedAt, title, description, source });
-    } else {
-      onSave({ urlToImage, publishedAt, title, description, source });
+    if (!currentUser) return;
+
+    if (isSavedPage) {
+      onRemove(_id);
+    } else if (!isSaved) {
+      onSave({ image, date, title, text, source, link, keyword });
     }
   };
 
   return (
     <li className="card">
-      <img src={urlToImage} className="card__image" />
+      <img src={image} className="card__image" alt={title} />
+
+      {isSavedPage && keyword && <span className="card__keyword">{keyword}</span>}
+
       <div className="card__content">
         <p className="card__date">
-          {new Date(publishedAt).toLocaleDateString('es-ES', {
+          {new Date(date).toLocaleDateString('es-ES', {
             day: 'numeric',
             month: 'long',
             year: 'numeric',
           })}
         </p>
-        <h3 className="card__title">{title}</h3>
-        <p className="card__text">{description}</p>
-        <p className="card__source">{source.name}</p>
+        <a href={link} target="_blank" rel="noreferrer" className="card__link">
+          <h3 className="card__title">{title}</h3>
+        </a>
+        <p className="card__text">{text}</p>
+        <p className="card__source">{source}</p>
         <button
-          title="Inicia sesión para guardar artículos"
-          className={`card__save-button ${isSaved && 'card__save-button_active'}`}
+          title={isSavedPage ? 'Eliminar artículo' : 'Guardar artículo'}
+          className={`card__action-button ${isSavedPage ? 'card__save-button_remove' : isSaved && 'card__action-button_saved'}`}
           onClick={handleSaveBookmark}
-        ></button>
+        />
       </div>
     </li>
   );

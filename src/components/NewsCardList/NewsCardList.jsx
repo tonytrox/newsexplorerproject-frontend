@@ -1,20 +1,35 @@
 import './newsCardList.css';
-
 import NewsCard from '../NewsCard/NewsCard';
+import { normalizeArticle } from '../../utils/normalizeArticle';
 
-function NewsCardList({ title, cards, onShowMore, hasMore, savedCards, onSave, onRemove }) {
+function NewsCardList({
+  title,
+  cards,
+  onShowMore,
+  hasMore,
+  savedCards,
+  onSave,
+  onRemove,
+  keyword,
+  isSavedPage,
+}) {
   return (
     <section className="news">
       <div className="news__container">
         {title && <h2 className="news__title">{title}</h2>}
         <ul className="news__list">
           {cards.map((itemNews, index) => {
-            const isSaved = savedCards.some((savedCard) => savedCard.title === itemNews.title);
+            const article = normalizeArticle(itemNews, keyword);
+            const isSaved = savedCards
+              ? savedCards.some((savedCard) => savedCard.title === article.title)
+              : false;
+
             return (
               <NewsCard
                 key={index}
-                {...itemNews}
+                {...article}
                 isSaved={isSaved}
+                isSavedPage={isSavedPage}
                 onSave={onSave}
                 onRemove={onRemove}
               />

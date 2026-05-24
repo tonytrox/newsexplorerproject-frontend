@@ -5,11 +5,9 @@ import NotFoundResults from '../NotFoundResults/NotFoundResults';
 import { createNewsData } from '../../utils/NewsAPI';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-// Función para simular un retraso
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
-  const [keyword, setKeyword] = useState('');
+function SearchForm({ cards, setCards, savedCards, onSave, onRemove, token, keyword, setKeyword }) {
   const [inputSearchError, setInputSearchError] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,11 +15,6 @@ function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
-
-    if (!keyword.trim()) {
-      setInputSearchError('Por favor, introduzca una palabra clave');
-      return;
-    }
 
     setError(null);
     setLoading(true);
@@ -105,6 +98,8 @@ function SearchForm({ cards, setCards, savedCards, onSave, onRemove }) {
           savedCards={savedCards}
           onSave={onSave}
           onRemove={onRemove}
+          token={token}
+          keyword={keyword}
         />
       )}
     </>

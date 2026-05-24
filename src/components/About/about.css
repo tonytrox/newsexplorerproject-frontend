@@ -1,24 +1,21 @@
 .about {
   background-color: #ffffff;
-  padding-top: 80px;
-  padding-bottom: 80px;
-  padding-left: 104px;
-  padding-right: 216px;
+  padding: 32px 16px 104px;
 }
 
 .about__container {
   color: #1a1b22;
-  display: flex;
-  gap: 56px;
+  display: block;
 }
 
 .about__avatar {
   display: flex;
+  justify-content: center;
 }
 
 .about__avatar-image {
-  width: clamp(232px, 32.23vw, 464px);
-  height: clamp(232px, 32.23vw, 464px);
+  width: 272px;
+  height: 272px;
   border-radius: 100%;
   object-fit: cover;
 }
@@ -26,35 +23,42 @@
 .about__heading {
   font-family: 'Roboto Slab', serif;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 46px;
-  margin: 0;
-  padding-top: 51px;
-  padding-bottom: 24px;
+  padding-top: 24px;
+  padding-bottom: 16px;
 }
 
 .about__description {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
-  margin: 0px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .about {
     padding: 40px;
   }
 
   .about__container {
+    display: flex;
     gap: 32px;
   }
 
   .about__avatar {
+    justify-content: flex-start;
     align-items: center;
   }
+
+  .about__avatar-image {
+    width: clamp(232px, 32.23vw, 464px);
+    height: clamp(232px, 32.23vw, 464px);
+  }
+
   .about__heading {
-    padding-top: 0px;
+    padding-top: 0;
+    padding-bottom: 24px;
     font-size: 30px;
   }
 
@@ -63,27 +67,26 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (min-width: 1440px) {
   .about {
-    padding: 32px 16px 104px;
+    padding: 80px 216px 80px 104px;
   }
 
   .about__container {
-    display: block;
-  }
-
-  .about__avatar {
-    justify-content: center;
+    gap: 56px;
   }
 
   .about__avatar-image {
-    width: 272px;
-    height: 272px;
+    width: 464px;
+    height: 464px;
   }
 
   .about__heading {
-    padding-top: 24px;
-    padding-bottom: 16px;
-    font-size: 30px;
+    padding-top: 51px;
+    font-size: 40px;
+  }
+
+  .about__description {
+    font-size: 18px;
   }
 }

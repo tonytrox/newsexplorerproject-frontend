@@ -1,5 +1,7 @@
 ## New Explorer – Frontend Project
 
+#### Usuario TEST: prueba@mail.com / Password: prueba
+
 New Explorer es un proyecto frontend desarrollado con React + Vite, enfocado en la búsqueda y visualización de información, priorizando una estructura clara, manejo de estados y una correcta gestión de errores.
 
 ### Tecnologías utilizadas
@@ -30,3 +32,10 @@ El proyecto está adaptado a las siguientes resoluciones:
 - 1440px
 
 Las transiciones entre resoluciones podrán optimizarse en entregas posteriores.
+Posteriormente se añadira la opcion de Login para que cada usuario pueda almacenar
+sus noticias destacadas.
+
+#### Para ejecutar el proyecto, clonar el repositorio local
+
+- pnpm install
+- pnpm dev

@@ -2,7 +2,8 @@ import './header.css';
 import Navigation from '../Navigation/Navigation';
 import { useLocation, NavLink } from 'react-router-dom';
 
-function Header() {
+// recibe la prop desde el componente Home
+function Header({ onOpenLogin, onLogout }) {
   const location = useLocation();
   const isSavedPage = location.pathname === '/saved-news';
 
@@ -13,7 +14,8 @@ function Header() {
           NewsExplorer
         </NavLink>
       </h1>
-      <Navigation />
+      {/* pasa onOpenLogin a Navigation */}
+      <Navigation onOpenLogin={onOpenLogin} onLogout={onLogout} />
     </header>
   );
 }

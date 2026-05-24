@@ -3,12 +3,17 @@ import Header from '../Header/Header';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import NewsCardList from '../NewsCardList/NewsCardList';
 
-function SavedNews({ savedCards, onRemove }) {
+function SavedNews({ savedCards, onRemove, currentUser, onLogout }) {
   return (
     <main className="saved-news">
-      <Header />
-      <SavedNewsHeader />
-      <NewsCardList cards={savedCards} savedCards={savedCards} onRemove={onRemove} />
+      <Header currentUser={currentUser} onLogout={onLogout} />
+      <SavedNewsHeader savedCards={savedCards} />
+      <NewsCardList
+        cards={savedCards}
+        savedCards={savedCards}
+        onRemove={onRemove}
+        isSavedPage={true}
+      />
       <Footer />
     </main>
   );
